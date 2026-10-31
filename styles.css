@@ -141,13 +141,13 @@ body{font-size:16px}.main-nav a,.footer-links a{font-size:14px}.header-cta,.butt
 .final-email-copy .card-kicker{color:#d9a75d}
 .final-email-copy strong{font-family:var(--display);font-size:20px;line-height:1.35;color:#f4faf2}
 .final-email-copy small{font-size:14px;line-height:1.55;color:#d4e5d7}
-.participant-details-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(90px,.48fr);gap:10px}
+.participant-details-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .final-email-card .email-picker{min-width:0}
-.participant-details-fields .email-picker:last-child{grid-column:1/-1}
+.participant-details-fields .email-picker.full-width{grid-column:1/-1}
 .final-email-card .email-picker>span{font-size:14px;color:#d7e7bd}
 .final-email-card .email-picker>span small{font-size:11px;font-weight:500;color:#ccddc4}
 .final-email-card .email-picker input{min-height:49px;border-color:#d9a75d;font-size:16px}
-@media(max-width:680px){.final-email-card{grid-template-columns:1fr;gap:12px;padding:15px}.participant-details-fields{grid-template-columns:minmax(0,1fr) minmax(90px,.48fr)}.final-email-copy strong{font-size:18px}.final-email-copy small{font-size:13px}}
+@media(max-width:680px){.final-email-card{grid-template-columns:1fr;gap:12px;padding:15px}.participant-details-fields{grid-template-columns:1fr}.final-email-copy strong{font-size:18px}.final-email-copy small{font-size:13px}}
 /* Clickable three-dimensional cards in the homepage guide. */
 .how-card{width:100%;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer;appearance:none;-webkit-appearance:none;perspective:1000px}
 .how-card:focus-visible{outline:3px solid #d9a75d;outline-offset:4px}

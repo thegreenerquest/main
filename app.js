@@ -1,3 +1,6 @@
+// Optional: paste your deployed Google Apps Script Web App URL here, or set it via window.CARBON_QUEST_SAVE_URL in the HTML
+const APPS_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwOlbi0_xKRZ6SQBMM4n6okFEYhtzBw1BnHLKlSH48RWjFABVm50RDRdJDM7WTfmW9I/exec';
+
 const questionnaires = {
   school: {
     label: 'School',
@@ -306,6 +309,7 @@ let selectedCountry = '';
 let participantEmail = '';
 let participantName = '';
 let participantAge = '';
+let participantCity = '';
 let submissionStarted = false;
 let selectedSchoolLevel = pageTrack === 'school' ? (document.body.dataset.schoolLevel || 'senior') : null;
 
@@ -458,7 +462,7 @@ function renderStage() {
   const stageRequiredAnswered = stage.questions.filter((question) => isRequiredQuestion(question) && answerExists(question)).length;
   const checkpoint = lastScore?.nextIndex === activeStage ? renderCheckpoint(lastScore) : '';
   const emailPrompt = activeStage === stages.length - 1
-    ? `<div class="final-email-card"><div class="final-email-copy"><span class="card-kicker">YOUR PDF REPORT</span><strong>Add your details to unlock the download</strong><small>A valid email address is needed before you finish. Name and age are optional.</small></div><div class="participant-details-fields"><label class="email-picker" for="participant-name"><span>Name <small>(optional)</small></span><input id="participant-name" type="text" name="name" autocomplete="name" maxlength="120" placeholder="Your name" value="${escapeHtml(participantName)}" /></label><label class="email-picker" for="participant-age"><span>Age <small>(optional)</small></span><input id="participant-age" type="number" name="age" autocomplete="off" inputmode="numeric" min="1" max="120" step="1" placeholder="Age" value="${escapeHtml(participantAge)}" /></label><label class="email-picker" for="participant-email"><span>Email address</span><input id="participant-email" type="email" name="email" autocomplete="email" maxlength="254" placeholder="you@example.com" value="${escapeHtml(participantEmail)}" required /></label></div></div>`
+    ? `<div class="final-email-card"><div class="final-email-copy"><span class="card-kicker">YOUR PDF REPORT</span><strong>Add your details to unlock the download</strong><small>A valid email address is needed before you finish. Name, age, and city are optional.</small></div><div class="participant-details-fields"><label class="email-picker" for="participant-name"><span>Name <small>(optional)</small></span><input id="participant-name" type="text" name="name" autocomplete="name" maxlength="120" placeholder="Your name" value="${escapeHtml(participantName)}" /></label><label class="email-picker" for="participant-age"><span>Age <small>(optional)</small></span><input id="participant-age" type="number" name="age" autocomplete="off" inputmode="numeric" min="1" max="120" step="1" placeholder="Age" value="${escapeHtml(participantAge)}" /></label><label class="email-picker" for="participant-city"><span>City <small>(optional)</small></span><input id="participant-city" type="text" name="city" autocomplete="address-level2" maxlength="100" placeholder="City" value="${escapeHtml(participantCity)}" /></label><label class="email-picker" for="participant-email"><span>Email address</span><input id="participant-email" type="email" name="email" autocomplete="email" maxlength="254" placeholder="you@example.com" value="${escapeHtml(participantEmail)}" required /></label></div></div>`
     : '';
   stagePanel.innerHTML = `${checkpoint}<div class="stage-panel-head"><div><div class="stage-overline">SECTION ${activeStage + 1} · FIELD BADGE: ${escapeHtml(stage.badge)}</div><h3>${escapeHtml(stage.title)}</h3><p>${escapeHtml(stage.description)}</p></div><span class="stage-count-badge">${stage.questions.filter(answerExists).length} / ${stage.questions.length} answered</span></div><div class="section-required-progress" id="section-required-progress" role="status"><strong>${stageRequiredAnswered} of ${stageRequiredTotal} required answers complete</strong><span>Required questions are marked. Optional questions can be skipped.</span></div><div class="question-grid">${questions}</div>${emailPrompt}`;
   $('#stage-counter').textContent = `SECTION ${activeStage + 1} OF ${stages.length}`;
@@ -573,6 +577,7 @@ function startQuest() {
   participantEmail = '';
   participantName = '';
   participantAge = '';
+  participantCity = '';
   selectedCountry = countryChoice;
   activeTrack = selectedTrack;
   activeStage = 0;
@@ -640,6 +645,11 @@ stagePanel.addEventListener('input', (event) => {
     participantAge = ageInput.value;
     return;
   }
+  const cityInput = event.target.closest('#participant-city');
+  if (cityInput) {
+    participantCity = cityInput.value;
+    return;
+  }
   const emailInput = event.target.closest('#participant-email');
   if (emailInput) {
     participantEmail = emailInput.value;
@@ -703,9 +713,11 @@ $('#next-stage').addEventListener('click', () => {
   if (isFinalStage) {
     const nameInput = $('#participant-name');
     const ageInput = $('#participant-age');
+    const cityInput = $('#participant-city');
     const emailInput = $('#participant-email');
     nameInput.value = nameInput.value.trim();
     ageInput.value = ageInput.value.trim();
+    if (cityInput) cityInput.value = cityInput.value.trim();
     emailInput.value = emailInput.value.trim();
     if (nameInput.value.length > 120 || !ageInput.checkValidity()) {
       const invalidInput = nameInput.value.length > 120 ? nameInput : ageInput;
@@ -721,6 +733,7 @@ $('#next-stage').addEventListener('click', () => {
     }
     participantName = nameInput.value;
     participantAge = ageInput.value;
+    participantCity = cityInput ? cityInput.value : '';
     participantEmail = emailInput.value;
   }
   const answered = stage.questions.filter(answerExists).length;
@@ -990,6 +1003,7 @@ function resetQuest() {
   participantEmail = '';
   participantName = '';
   participantAge = '';
+  participantCity = '';
   if (activeTrack === 'school' && selectedSchoolLevel === 'junior') answers.school_days = '5';
   stageScores = {};
   activeStage = 0;
@@ -1009,21 +1023,38 @@ $('#retake-button').addEventListener('click', resetQuest);
 
 function buildSubmissionData() {
   const emissions = calculateEmissions();
+  const suggestions = getSuggestions();
+  const trackKey = activeTrack === 'school'
+    ? (selectedSchoolLevel === 'junior' ? 'junior' : 'senior')
+    : activeTrack;
+  const totalKg = emissions.totalKg;
+  const annualKg = totalKg !== null ? Math.round(totalKg * 100) / 100 : null;
+  const monthlyKg = totalKg !== null ? Math.round((totalKg / 12) * 100) / 100 : null;
+  const greenPoints = currentXP() + (answeredQuestions().length > 0 ? 50 : 0);
+
   return {
+    submissionId: (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : ('sub_' + Date.now()),
     questionnaire: 'GreenerQuest',
+    trackKey,
     studentPath: pathDisplayLabel(),
     pathLabel: pathDisplayLabel(),
     schoolLevel: activeTrack === 'school' ? (selectedSchoolLevel === 'junior' ? 'Junior' : 'Senior') : undefined,
-    email: participantEmail,
     name: participantName.trim(),
     age: participantAge === '' ? '' : Number(participantAge),
+    city: participantCity.trim(),
+    email: participantEmail.trim(),
+    category: emissions.tier || pathDisplayLabel(),
     submittedAt: new Date().toISOString(),
     score: {
-      xp: currentXP() + (answeredQuestions().length > 0 ? 50 : 0),
+      xp: greenPoints,
       fieldBadges: activeQuestionnaire().stages.filter((stage, index) => stageScores[index] !== undefined && stage.questions.filter((question) => isRequiredQuestion(question)).every(answerExists)).map((stage) => stage.badge)
     },
+    greenPoints,
     country: emissions.country,
     emissions,
+    annualKg,
+    monthlyKg,
+    suggestions,
     note: 'Emissions are a partial tracked activity subtotal. Unmeasured sections are not zero; the tier is gamified and is not a certification.',
     responses: allQuestions().filter(answerExists).map((question) => ({
       category: question.stageTitle,
@@ -1118,7 +1149,14 @@ function buildReportBlocks(data) {
   ];
 
   if (data.name) blocks.splice(2, 0, { kind: 'small', text: `Name: ${data.name}` });
-  if (data.age !== '' && data.age !== null && data.age !== undefined) blocks.splice(data.name ? 3 : 2, 0, { kind: 'small', text: `Age: ${data.age}` });
+  let participantOffset = data.name ? 3 : 2;
+  if (data.age !== '' && data.age !== null && data.age !== undefined) {
+    blocks.splice(participantOffset, 0, { kind: 'small', text: `Age: ${data.age}` });
+    participantOffset++;
+  }
+  if (data.city) {
+    blocks.splice(participantOffset, 0, { kind: 'small', text: `City: ${data.city}` });
+  }
 
   if (!groups.length) {
     blocks.push({ kind: 'body', text: 'No answers were added this time. You can still take another pass whenever you are ready.' });
@@ -1358,31 +1396,44 @@ $('#download-button').addEventListener('click', () => {
 
 async function submitActivitySnapshot() {
   const status = $('#drive-save-status');
-  if (window.location.protocol === 'file:') {
+  const rawUrl = (window.CARBON_QUEST_SAVE_URL && !window.CARBON_QUEST_SAVE_URL.includes('YOUR_APPS_SCRIPT_WEB_APP_URL_HERE'))
+    ? window.CARBON_QUEST_SAVE_URL.trim()
+    : (APPS_SCRIPT_WEB_APP_URL.trim() || '/api/submissions');
+  const saveUrl = rawUrl;
+
+  if (window.location.protocol === 'file:' && !saveUrl.startsWith('https://')) {
     status.className = 'drive-save-status';
     status.textContent = '';
     status.hidden = true;
     return;
   }
+
   status.hidden = false;
   status.className = 'drive-save-status is-saving';
-  status.textContent = 'Adding your answers and calculated emissions to the research sheet…';
+  status.textContent = 'Saving your answers and emissions to the database…';
+
   try {
-    const response = await fetch(window.CARBON_QUEST_SAVE_URL || '/api/submissions', {
+    const payload = buildSubmissionData();
+    const isAppsScript = saveUrl.includes('script.google.com');
+
+    // Use text/plain for Google Apps Script to prevent browser CORS preflight failure
+    const response = await fetch(saveUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(buildSubmissionData())
+      headers: { 'Content-Type': isAppsScript ? 'text/plain;charset=utf-8' : 'application/json' },
+      body: JSON.stringify(payload)
     });
+
     const result = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(result.error || 'The data collection service is not ready.');
+    if (!response.ok && result.status !== 'success') {
+      throw new Error(result.error || result.message || 'The database service could not record the submission.');
+    }
+
     status.className = 'drive-save-status is-success';
-    status.textContent = result.driveArchived === false
-      ? 'Your answers and emissions were added to the research sheet. The Drive backup could not be saved.'
-      : 'Your answers and calculated emissions were added to the GreenerQuest research sheet.';
-  } catch {
-    status.className = 'drive-save-status';
-    status.textContent = '';
-    status.hidden = true;
+    status.textContent = 'Your answers and calculated emissions were added to the GreenerQuest database.';
+  } catch (err) {
+    console.error('Submission error:', err);
+    status.className = 'drive-save-status is-error';
+    status.textContent = 'Could not save to the database. You can still download your PDF report.';
   }
 }
 
