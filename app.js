@@ -1417,15 +1417,30 @@ async function submitActivitySnapshot() {
     const isAppsScript = saveUrl.includes('script.google.com');
 
     // Use text/plain for Google Apps Script to prevent browser CORS preflight failure
-    const response = await fetch(saveUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': isAppsScript ? 'text/plain;charset=utf-8' : 'application/json' },
-      body: JSON.stringify(payload)
-    });
+    try {
+      const response = await fetch(saveUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': isAppsScript ? 'text/plain;charset=utf-8' : 'application/json' },
+        body: JSON.stringify(payload)
+      });
 
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok && result.status !== 'success') {
-      throw new Error(result.error || result.message || 'The database service could not record the submission.');
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok && result.status !== 'success') {
+        throw new Error(result.error || result.message || 'The database service could not record the submission.');
+      }
+    } catch (fetchErr) {
+      if (isAppsScript) {
+        // Fallback for browsers or privacy extensions that block cross-origin 302 redirects with CORS
+        console.warn('Standard fetch failed, falling back to no-cors mode:', fetchErr);
+        await fetch(saveUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+      } else {
+        throw fetchErr;
+      }
     }
 
     status.className = 'drive-save-status is-success';

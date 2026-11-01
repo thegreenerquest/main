@@ -39,8 +39,45 @@ function doPost(e) {
 
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getSheetByName(tabName);
+
+    // If exact name not found, search flexibly (ignores spaces, underscores, case)
     if (!sheet) {
-      sheet = ss.insertSheet(tabName);
+      var allSheets = ss.getSheets();
+      var cleanTarget = tabName.toLowerCase().replace(/[^a-z0-9]/g, '');
+      for (var i = 0; i < allSheets.length; i++) {
+        var sName = allSheets[i].getName().toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (sName === cleanTarget) {
+          sheet = allSheets[i];
+          break;
+        }
+      }
+
+      // Check common aliases (e.g. Senior Student vs Senior School vs Senior)
+      if (!sheet) {
+        var aliases = {
+          'senior': ['seniorschool', 'seniorstudent', 'senior', 'school'],
+          'junior': ['juniorschool', 'juniorstudent', 'junior'],
+          'college': ['collegestudent', 'college'],
+          'employee': ['employee', 'corporate', 'workplace'],
+          'individual': ['individual', 'personal']
+        };
+        var currentKey = trackKey.includes('senior') ? 'senior' : trackKey.includes('junior') ? 'junior' : trackKey;
+        var keyAliases = aliases[currentKey] || [];
+        for (var a = 0; a < keyAliases.length; a++) {
+          for (var j = 0; j < allSheets.length; j++) {
+            var aliasClean = allSheets[j].getName().toLowerCase().replace(/[^a-z0-9]/g, '');
+            if (aliasClean === keyAliases[a]) {
+              sheet = allSheets[j];
+              break;
+            }
+          }
+          if (sheet) break;
+        }
+      }
+
+      if (!sheet) {
+        sheet = ss.insertSheet(tabName);
+      }
     }
 
     // Ensure headers exist if tab is empty
