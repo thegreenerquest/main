@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" width="160" height="120">
+  <!-- MyCarbonCredit Individual (21+): leafy carbon footprint beside a solar-powered home -->
+  <defs>
+    <linearGradient id="indBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4faf3"/>
+      <stop offset="1" stop-color="#d9ecdc"/>
+    </linearGradient>
+    <linearGradient id="indFoot" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8cc46a"/>
+      <stop offset="1" stop-color="#2f7048"/>
+    </linearGradient>
+    <linearGradient id="indPanel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3d6f8f"/>
+      <stop offset="1" stop-color="#22465e"/>
+    </linearGradient>
+  </defs>
+  <circle cx="80" cy="60" r="54" fill="url(#indBg)"/>
+  <circle cx="34" cy="28" r="9" fill="#f0c27b"/>
+  <circle cx="34" cy="28" r="14" fill="#f0c27b" opacity="0.22"/>
+  <path d="M22 100 Q80 88 138 100" fill="none" stroke="#bcd8c0" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- footprint -->
+  <ellipse cx="60" cy="72" rx="16" ry="25" fill="url(#indFoot)"/>
+  <circle cx="49" cy="40" r="6.2" fill="#5f9f55"/>
+  <circle cx="59.5" cy="35.5" r="5" fill="#6aab5a"/>
+  <circle cx="69" cy="37.5" r="4.3" fill="#76b45e"/>
+  <circle cx="76" cy="43" r="3.6" fill="#82bb62"/>
+  <path d="M60 94 C60 82 60 68 62 52" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" opacity="0.85"/>
+  <path d="M60.5 82 L52 74 M61 72 L69 64 M61.4 62 L54 56" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- home with solar roof -->
+  <path d="M96 66 L115 50 L134 66 V96 H96 Z" fill="#fffdf7" stroke="#2f7048" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M101 61.5 L115 50 L122 55.8 L108 67.3 Z" fill="url(#indPanel)"/>
+  <path d="M104.5 58.6 L111.5 64.4 M108 55.7 L115 61.5" stroke="#9cc3dc" stroke-width="1" opacity="0.8"/>
+  <rect x="109" y="78" width="12" height="18" rx="2" fill="#d5a46b"/>
+  <rect x="123" y="70" width="7" height="7" rx="1.5" fill="#cfe6d3" stroke="#2f7048" stroke-width="1.4"/>
+  <path d="M90 96 C88 88 90 82 96 78 C96 86 94 92 90 96 Z" fill="#7eb35c"/>
+</svg>

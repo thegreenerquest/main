@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carbon Impact Dashboard | My Carbon Credit</title>
+  <meta name="description" content="Explore aggregated carbon footprint insights from the My Carbon Credit community. Interactive footprint visualization across transport, home energy, food, digital lifestyle, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <main class="app-shell dash-shell">
+    <section class="hero dash-hero-section" aria-labelledby="dash-hero-title">
+      <img class="hero-image" src="assets/hero-eco-city.png"
+        alt="Illustrated eco city with transit, solar rooftops, groceries, and greenery" />
+      <div class="hero-overlay"></div>
+      <nav class="topbar" aria-label="Primary">
+        <a class="brand-mark" href="index.html" aria-label="My Carbon Credit home">
+          <img class="brand-logo full-brand-logo" src="assets/Data Leaf.png" alt="My Carbon Credit" />
+        </a>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <a class="ghost-button" href="index.html" style="font-size:0.88rem;">Home</a>
+          <a class="ghost-button" href="quiz.html" style="font-size:0.88rem;">Take the Quiz</a>
+          <span class="ghost-button" style="cursor: default; pointer-events: none;">Welcome User</span>
+        </div>
+      </nav>
+      <div class="hero-copy" style="padding-bottom: 40px;">
+        <p class="eyebrow">Community Carbon Impact</p>
+        <h1 id="dash-hero-title">Explore Our Collective Footprint</h1>
+        <p>
+          Live insights from the My Carbon Credit community. Tap any zone on the footprint to explore category-level metrics.
+        </p>
+        <div class="hero-actions" style="margin-top: 22px; align-items: center; gap: 14px;">
+          <button id="refreshBtn" class="ghost-button" style="font-size:0.88rem; gap:8px; cursor:pointer;" aria-label="Refresh dashboard data">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            Refresh Data
+          </button>
+          <span id="lastUpdated" class="dash-last-updated" style="color: rgba(255,255,255,0.7); font-size:0.82rem; font-weight: 600;" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+    <section class="dash-main" aria-label="Dashboard content">
+      <div id="dashLoading" class="dash-state" role="status" aria-live="polite">
+        <div class="dash-spinner" aria-hidden="true"></div>
+        <p>Loading carbon impact data&hellip;</p>
+      </div>
+      <div id="dashError" class="dash-state dash-error" role="alert" aria-live="assertive" hidden>
+        <div class="dash-error-icon" aria-hidden="true">&#x26A0;&#xFE0F;</div>
+        <p>Unable to load the latest carbon impact data.</p>
+        <p class="dash-error-sub">Please check your connection and try refreshing.</p>
+        <button class="dash-refresh-btn dash-refresh-inline" onclick="refreshDashboard()">Try Again</button>
+      </div>
+      <div id="dashContent" class="dash-content" hidden>
+        <div class="dash-center-layout">
+          <div class="dash-footprint-wrap" role="region" aria-label="Interactive carbon footprint. Tap a zone to explore category data.">
+            <div class="dash-footprint-legend"><p>Tap a zone to explore</p></div>
+
+            <!--
+              ═══════════════════════════════════════════════════════════
+              CARBON FOOTPRINT SVG
+              ───────────────────────────────────────────────────────────
+              • #footShapes (body + 5 toes) is defined once and reused for:
+                  1. the clipPath that trims every zone to the foot silhouette
+                  2. the outer outline (thick stroke drawn BEHIND a solid
+                     underlay, so only the outer edge is visible — no toe
+                     strokes crossing the body)
+              • 8 zones stack top→bottom with NO gaps:
+                  Emissions (toes + ball, y<215)
+                  Fuel | Electricity   (215–300)
+                  Gas  | Transport     (300–390)
+                  Offsets              (390–480, arch)
+                  Recycling            (480–595)
+                  Waste                (595+, heel)
+              ═══════════════════════════════════════════════════════════
+            -->
+            <svg id="carbonFootprint" class="cf-svg"
+                 viewBox="-40 0 580 760"
+                 xmlns="http://www.w3.org/2000/svg"
+                 overflow="visible"
+                 role="img"
+                 aria-label="Carbon footprint — 8 interactive zones">
+              <defs>
+                <!-- Foot silhouette: anatomical right-foot sole + 5 toes -->
+                <g id="footShapes">
+                  <path id="masterFootShape" d="
+                    M 148 140
+                    C 120 140 98 175 92 220
+                    C 86 265 110 315 130 360
+                    C 152 405 168 450 162 495
+                    C 156 535 146 575 142 610
+                    C 138 650 150 695 178 720
+                    C 202 738 245 742 272 728
+                    C 300 712 320 678 326 638
+                    C 334 592 336 548 342 502
+                    C 348 452 358 402 368 352
+                    C 378 302 388 252 385 208
+                    C 382 168 365 140 338 140
+                    Z"/>
+                  <path d="M 118 148 C 96 128 92 78 120 44 C 144 14 176 18 190 52 C 202 85 186 132 152 152 Z"/>
+                  <ellipse cx="230" cy="58" rx="25" ry="36"/>
+                  <ellipse cx="282" cy="78" rx="21" ry="30"/>
+                  <ellipse cx="328" cy="106" rx="18" ry="25"/>
+                  <ellipse cx="365" cy="140" rx="15" ry="20"/>
+                </g>
+
+                <!-- Master clip — browser unions the shapes into one silhouette -->
+                <clipPath id="fc">
+                  <path d="
+                    M 148 140
+                    C 120 140 98 175 92 220
+                    C 86 265 110 315 130 360
+                    C 152 405 168 450 162 495
+                    C 156 535 146 575 142 610
+                    C 138 650 150 695 178 720
+                    C 202 738 245 742 272 728
+                    C 300 712 320 678 326 638
+                    C 334 592 336 548 342 502
+                    C 348 452 358 402 368 352
+                    C 378 302 388 252 385 208
+                    C 382 168 365 140 338 140
+                    Z"/>
+                  <path d="M 118 148 C 96 128 92 78 120 44 C 144 14 176 18 190 52 C 202 85 186 132 152 152 Z"/>
+                  <ellipse cx="230" cy="58" rx="25" ry="36"/>
+                  <ellipse cx="282" cy="78" rx="21" ry="30"/>
+                  <ellipse cx="328" cy="106" rx="18" ry="25"/>
+                  <ellipse cx="365" cy="140" rx="15" ry="20"/>
+                </clipPath>
+              </defs>
+
+              <!-- OUTER OUTLINE: thick white stroke, then a solid underlay on top
+                   hides the inner half of every stroke → clean single outline -->
+              <g pointer-events="none">
+                <use href="#footShapes" fill="none" stroke="#ffffff" stroke-width="8" stroke-linejoin="round"/>
+                <use href="#footShapes" fill="#ffffff" stroke="none"/>
+              </g>
+
+              <!-- ══════════════════════════════════════════════
+                   ZONE FILLS — all clipped inside foot silhouette
+                   ══════════════════════════════════════════════ -->
+              <g clip-path="url(#fc)">
+
+                <!-- 1. EMISSIONS — toes + ball of foot -->
+                <g id="zone-emissions" class="cf-zone" data-zone="emissions" role="button" tabindex="0" aria-label="Emissions category">
+                  <rect class="cf-body" x="-30" y="-30" width="560" height="245"/>
+
+                  <!-- H2O sub-badge -->
+                  <g id="subzone-h2o" class="cf-subbadge" data-sub="h2o" role="button" tabindex="0" aria-label="Water footprint (H2O)">
+                    <circle cx="205" cy="180" r="25" fill="#1d6a3a" stroke="#fff" stroke-width="2.5"/>
+                    <path d="M205 160 C201 167 196 171 196 176 A9 9 0 0 0 214 176 C214 171 209 167 205 160 Z" fill="#fff"/>
+                    <text x="205" y="198" font-family="Inter,sans-serif" font-size="9" font-weight="900" fill="#fff" text-anchor="middle">H₂O</text>
+                  </g>
+
+                  <!-- CO2 sub-badge -->
+                  <g id="subzone-co2" class="cf-subbadge" data-sub="co2" role="button" tabindex="0" aria-label="Carbon emissions (CO2)">
+                    <circle cx="275" cy="180" r="25" fill="#16552f" stroke="#fff" stroke-width="2.5"/>
+                    <path d="M263 184 A6 6 0 0 1 265 172 A8 8 0 0 1 280 168 A6.5 6.5 0 0 1 288 178 A4.5 4.5 0 0 1 286 184 Z" fill="#fff"/>
+                    <text x="275" y="198" font-family="Inter,sans-serif" font-size="9" font-weight="900" fill="#fff" text-anchor="middle">CO₂</text>
+                  </g>
+                </g>
+
+                <!-- 2. FUEL — left band -->
+                <g id="zone-fuel" class="cf-zone" data-zone="fuel" role="button" tabindex="0" aria-label="Fuel category">
+                  <rect class="cf-body" x="-30" y="215" width="270" height="85"/>
+                  <g transform="translate(158,262)" fill="#fff" pointer-events="none">
+                    <rect x="-20" y="-26" width="30" height="44" rx="4"/>
+                    <rect x="-15" y="-19" width="20" height="13" rx="2" fill="#3d8f45"/>
+                    <path d="M10-16 C21-16 34-7 29 5 C25 11 20 8 18 1 L18-9" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none"/>
+                    <path d="M18-9 L21-17 L29-20 L34-14 L31-8 L24-8 Z"/>
+                  </g>
+                </g>
+
+                <!-- 3. ELECTRICITY — right band -->
+                <g id="zone-electricity" class="cf-zone" data-zone="electricity" role="button" tabindex="0" aria-label="Electricity category">
+                  <rect class="cf-body" x="240" y="215" width="290" height="85"/>
+                  <g transform="translate(310,258) scale(0.85)" fill="#fff" pointer-events="none">
+                    <polygon points="9,-34 -14,2 4,2 -17,34 26,-8 7,-8"/>
+                  </g>
+                </g>
+
+                <!-- 4. GAS — left band -->
+                <g id="zone-gas" class="cf-zone" data-zone="gas" role="button" tabindex="0" aria-label="Gas category">
+                  <rect class="cf-body" x="-30" y="300" width="270" height="90"/>
+                  <g transform="translate(185,352) scale(1.15)" fill="#fff" pointer-events="none">
+                    <path d="M0-26 C0-26 12-12 12-3 C12 7 6 12-2 12 C-9 12-16 7-16-3 C-16-11-11-17-10-19 C-11-14-8-10-5-8 C-5-8-5-16 0-26 Z"/>
+                    <path d="M-2-6 C2-6 4-3 4 2 C4 5 2 8-2 8 C-5 8-7 5-7 2 C-7-3-5-6-2-6 Z" fill="#2a7d3c"/>
+                  </g>
+                </g>
+
+                <!-- 5. TRANSPORT — right band -->
+                <g id="zone-transport" class="cf-zone" data-zone="transport" role="button" tabindex="0" aria-label="Transport category">
+                  <rect class="cf-body" x="240" y="300" width="290" height="90"/>
+                  <g transform="translate(303,339) scale(0.92)" fill="#fff" pointer-events="none">
+                    <path d="M-38 2 C-40 2-42 4-43 8 C-44 12-44 18-43 20 C-42 22-41 23-38 23 L38 23 C41 23 42 22 43 20 C44 18 44 12 43 8 C42 4 40 2 38 2 L32 2 C30-4 27-9 24-11 L-24-11 C-27-9-30-4-32 2 Z"/>
+                    <path d="M-30 1 L-22-9 L22-9 L30 1 Z" fill="#22703a"/>
+                    <circle cx="-36" cy="11" r="4" fill="#22703a"/>
+                    <circle cx="36" cy="11" r="4" fill="#22703a"/>
+                    <rect x="-13" y="9" width="26" height="6" rx="2" fill="#22703a"/>
+                  </g>
+                </g>
+
+                <!-- 6. OFFSETS — arch band -->
+                <g id="zone-offsets" class="cf-zone" data-zone="offsets" role="button" tabindex="0" aria-label="Offsets category">
+                  <rect class="cf-body" x="-30" y="390" width="560" height="90"/>
+                  <g pointer-events="none">
+                    <circle cx="252" cy="435" r="30" fill="none" stroke="#fff" stroke-width="3"/>
+                    <g transform="translate(238,414)" fill="#fff">
+                      <path d="M0 44 C0 44 2 33 4 26 C14 26 26 17 28-2 C16 0 5 10 3 19 C1 26 1 37 0 44 Z"/>
+                      <path d="M3 19 Q12 7 26-2" stroke="#1d6434" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                    </g>
+                  </g>
+                </g>
+
+                <!-- 7. RECYCLING — lower sole -->
+                <g id="zone-recycling" class="cf-zone" data-zone="recycling" role="button" tabindex="0" aria-label="Recycling category">
+                  <rect class="cf-body" x="-30" y="480" width="560" height="115"/>
+                  <g transform="translate(246, 538) scale(0.095) translate(-256, -256)" fill="#fff" pointer-events="none">
+                    <path d="M174.7 45.1C192.2 17 223 0 256 0s63.8 17 81.3 45.1l38.6 61.7 27-15.6c8.4-4.9 18.9-4.2 26.6 1.7s11.1 15.9 8.6 25.3l-23.4 87.4c-3.4 12.8-16.6 20.4-29.4 17l-87.4-23.4c-9.4-2.5-16.3-10.4-17.6-20s3.4-19.1 11.8-23.9l28.4-16.4L283 79c-5.8-9.3-16-15-27-15s-21.2 5.7-27 15l-17.5 28c-9.2 14.8-28.6 19.5-43.6 10.5c-15.3-9.2-20.2-29.2-10.7-44.4l17.5-28zM429.5 251.9c15-9 34.4-4.3 43.6 10.5l24.4 39.1c9.4 15.1 14.4 32.4 14.6 50.2c.3 53.1-42.7 96.4-95.8 96.4L320 448l0 32c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-64-64c-9.4-9.4-9.4-24.6 0-33.9l64-64c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2l0 32 96.2 0c17.6 0 31.9-14.4 31.8-32c0-5.9-1.7-11.7-4.8-16.7l-24.4-39.1c-9.5-15.2-4.7-35.2 10.7-44.4zm-364.6-31L36 204.2c-8.4-4.9-13.1-14.3-11.8-23.9s8.2-17.5 17.6-20l87.4-23.4c12.8-3.4 26 4.2 29.4 17L182 241.2c2.5 9.4-.9 19.3-8.6 25.3s-18.2 6.6-26.6 1.7l-26.5-15.3L68.8 335.3c-3.1 5-4.8 10.8-4.8 16.7c-.1 17.6 14.2 32 31.8 32l32.2 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32.2 0C42.7 448-.3 404.8 0 351.6c.1-17.8 5.1-35.1 14.6-50.2l50.3-80.5z"/>
+                  </g>
+                </g>
+
+                <!-- 8. WASTE — heel -->
+                <g id="zone-waste" class="cf-zone" data-zone="waste" role="button" tabindex="0" aria-label="Waste category">
+                  <rect class="cf-body" x="-30" y="595" width="560" height="200"/>
+                  <g transform="translate(238, 660) scale(0.09) translate(-224, -256)" fill="#fff" pointer-events="none">
+                    <path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0L284.2 0c12.1 0 23.2 6.8 28.6 17.7L320 32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 96C14.3 96 0 81.7 0 64S14.3 32 32 32l96 0 7.2-14.3zM32 128l384 0 0 320c0 35.3-28.7 64-64 64L96 512c-35.3 0-64-28.7-64-64l0-320zm96 64c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16z"/>
+                  </g>
+                </g>
+
+                <!-- SEAM LINES (clipped to foot) -->
+                <g fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" pointer-events="none" opacity="0.55">
+                  <path d="M -30 215 H 530"/>
+                  <path d="M -30 300 H 530"/>
+                  <path d="M -30 390 H 530"/>
+                  <path d="M -30 480 H 530"/>
+                  <path d="M -30 595 H 530"/>
+                  <path d="M 240 215 V 390"/>
+                </g>
+
+              </g><!-- /clip-path="url(#fc)" -->
+
+              <!-- LEADER LINES (hidden on narrow screens) -->
+              <g class="cf-leader" stroke="#9aa89f" stroke-width="1.5" fill="#9aa89f" pointer-events="none">
+                <!-- right side -->
+                <line x1="390" y1="180" x2="402" y2="180"/><circle cx="390" cy="180" r="3"/>
+                <line x1="386" y1="258" x2="402" y2="258"/><circle cx="386" cy="258" r="3"/>
+                <line x1="376" y1="345" x2="402" y2="345"/><circle cx="376" cy="345" r="3"/>
+                <line x1="360" y1="435" x2="402" y2="435"/><circle cx="360" cy="435" r="3"/>
+                <!-- left side -->
+                <line x1="78" y1="258" x2="91"  y2="258"/><circle cx="91"  cy="258" r="3"/>
+                <line x1="78" y1="345" x2="119" y2="345"/><circle cx="119" cy="345" r="3"/>
+                <line x1="78" y1="537" x2="150" y2="537"/><circle cx="150" cy="537" r="3"/>
+                <line x1="78" y1="665" x2="143" y2="665"/><circle cx="143" cy="665" r="3"/>
+              </g>
+
+              <!-- LABELS — each aligned with its zone -->
+              <g pointer-events="none" dominant-baseline="middle">
+                <text class="cf-label-text cf-lbl-right" x="408" y="180" text-anchor="start">Emissions</text>
+                <text class="cf-label-text cf-lbl-right" x="408" y="258" text-anchor="start">Electricity</text>
+                <text class="cf-label-text cf-lbl-right" x="408" y="345" text-anchor="start">Transport</text>
+                <text class="cf-label-text cf-lbl-right" x="408" y="435" text-anchor="start">Offsets</text>
+                <text class="cf-label-text cf-lbl-left"  x="72"  y="258" text-anchor="end">Fuel</text>
+                <text class="cf-label-text cf-lbl-left"  x="72"  y="345" text-anchor="end">Gas</text>
+                <text class="cf-label-text cf-lbl-left"  x="72"  y="537" text-anchor="end">Recycling</text>
+                <text class="cf-label-text cf-lbl-left"  x="72"  y="665" text-anchor="end">Waste</text>
+              </g>
+            </svg>
+
+            <div id="zoneTooltip" class="cf-tooltip" aria-hidden="true" role="tooltip"></div>
+
+            <!-- Category Quick-Selector Legend (ordered top → bottom of the foot) -->
+            <div class="cf-mobile-legend" role="toolbar" aria-label="Footprint category quick selector">
+              <button type="button" class="cf-pill-btn" data-zone="emissions">☁️ Emissions</button>
+              <button type="button" class="cf-pill-btn" data-zone="fuel">⛽ Fuel</button>
+              <button type="button" class="cf-pill-btn" data-zone="electricity">⚡ Electricity</button>
+              <button type="button" class="cf-pill-btn" data-zone="gas">🔥 Gas</button>
+              <button type="button" class="cf-pill-btn" data-zone="transport">🚗 Transport</button>
+              <button type="button" class="cf-pill-btn" data-zone="offsets">🍃 Offsets</button>
+              <button type="button" class="cf-pill-btn" data-zone="recycling">♻️ Recycling</button>
+              <button type="button" class="cf-pill-btn" data-zone="waste">🗑️ Waste</button>
+            </div>
+          </div>
+          <aside class="dash-panel" id="metricsPanel" aria-label="Category metrics panel" aria-live="polite">
+            <div class="dash-panel-header">
+              <div>
+                <p class="eyebrow dash-panel-eyebrow" id="panelCategory">Overall Summary</p>
+                <h2 class="dash-panel-title" id="panelTitle">Carbon Impact</h2>
+              </div>
+              <button id="panelBackBtn" class="dash-back-btn" aria-label="Return to overall view" hidden>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                Back
+              </button>
+            </div>
+            <div class="dash-panel-body" id="panelBody"></div>
+          </aside>
+        </div>
+        <details class="dash-all-metrics" id="allMetricsDetails">
+          <summary class="dash-all-metrics-toggle">
+            <span>View All Metrics</span>
+            <svg class="dash-toggle-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="dash-all-metrics-body" id="allMetricsBody"></div>
+        </details>
+      </div>
+    </section>
+    <section class="hero footer-hero" aria-labelledby="footer-title">
+      <img class="hero-image" src="assets/hero-eco-city.png" alt="Illustrated eco city with transit, solar rooftops, groceries, and greenery" />
+      <div class="hero-overlay"></div>
+      <footer class="site-footer">
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Legal &amp; Privacy</h3>
+            <a href="priv-policy-footer.html">Privacy Policy</a>
+            <a href="tnc-footer.html">Terms &amp; Conditions</a>
+            <a href="cookie-policy.html">Cookie Policy</a>
+            <a href="data-deletion-footer.html">Data Deletion Request</a>
+          </div>
+          <div class="footer-section">
+            <h3>Information</h3>
+            <a href="transparency-carbon-methodology.html">Carbon Calculation Methodology</a>
+            <a href="dpdp-compliance-footer.html">DPDP Act Compliance</a>
+            <a href="disclaimer.html">Disclaimer</a>
+          </div>
+          <div class="footer-section">
+            <h3>Contact</h3>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+      </footer>
+    </section>
+  </main>
+  <script src="dashboard.js"></script>
+</body>
+</html>

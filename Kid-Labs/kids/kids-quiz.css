@@ -1,0 +1,1700 @@
+/**
+ * MyCarbonCredit Kids Quiz — Dedicated Interactive Stylesheet
+ * Preserves the MyCarbonCredit visual identity (warm cream, forest green,
+ * muted gold/amber, rounded cards, soft shadows) while delivering a
+ * tactile, child-friendly interactive experience for Ages 8–10 & 11–14.
+ */
+
+:root {
+  --kids-paper: #fbfaf5;
+  --kids-panel: #ffffff;
+  --kids-ink: #102119;
+  --kids-muted: #556459;
+  --kids-line: #ded8ca;
+  --kids-leaf: #2f7048;
+  --kids-leaf-mid: #4b815d;
+  --kids-leaf-soft: #eef7ef;
+  --kids-amber: #a46d29;
+  --kids-gold: #d5a46b;
+  --kids-gold-soft: #fff6e8;
+  --kids-sky: #e8f4fa;
+  --kids-sky-ink: #1e5f7c;
+  --kids-coral: #fdf0ec;
+  --kids-coral-ink: #b24b30;
+  --kids-shadow: 0 16px 44px rgba(26, 38, 31, 0.08);
+  --kids-radius: 26px;
+}
+
+body.kids-body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--kids-paper);
+  color: var(--kids-ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+.kids-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(238, 247, 239, 0.7) 0%, transparent 40%),
+    radial-gradient(circle at 88% 15%, rgba(255, 246, 232, 0.75) 0%, transparent 42%),
+    var(--kids-paper);
+}
+
+/* Header */
+.kids-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 clamp(18px, 5vw, 80px);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(222, 216, 202, 0.8);
+  box-shadow: 0 6px 22px rgba(22, 32, 25, 0.05);
+}
+
+.kids-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.kids-mode-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  background: var(--kids-gold-soft);
+  color: var(--kids-amber);
+  border: 1px solid rgba(213, 164, 107, 0.45);
+}
+
+.kids-student-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  background: #ffffff;
+  color: var(--kids-ink);
+  border: 1.5px solid var(--kids-line);
+}
+
+/* Main container */
+.kids-main {
+  flex: 1;
+  width: min(1260px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: clamp(14px, 2.5vh, 28px) 0 clamp(32px, 5vh, 52px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.kids-top-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.kids-top-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Resume Banner */
+.kids-resume-banner {
+  width: 100%;
+  background: linear-gradient(135deg, #eef7ef 0%, #fffdf7 100%);
+  border: 2px solid rgba(47, 112, 72, 0.35);
+  border-radius: 22px;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  box-shadow: 0 10px 28px rgba(47, 112, 72, 0.08);
+}
+
+.kids-resume-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kids-resume-copy strong {
+  font-size: 1.05rem;
+  color: var(--kids-leaf);
+}
+
+.kids-resume-copy span {
+  font-size: 0.92rem;
+  color: var(--kids-muted);
+}
+
+.kids-resume-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Landing Hero Card */
+.kids-hero-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid rgba(213, 164, 107, 0.45);
+  border-radius: 28px;
+  box-shadow: var(--kids-shadow);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.22fr 0.78fr;
+  align-items: stretch;
+}
+
+.kids-hero-copy {
+  padding: clamp(26px, 4vw, 46px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.kids-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.kids-badge-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--kids-leaf-soft);
+  color: var(--kids-leaf);
+  border: 1px solid rgba(47, 112, 72, 0.3);
+}
+
+.kids-age-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  background: var(--kids-gold-soft);
+  color: var(--kids-amber);
+  border: 1px solid rgba(213, 164, 107, 0.35);
+}
+
+.kids-hero-copy h1 {
+  margin: 0;
+  font-size: clamp(1.95rem, 3.5vw, 2.75rem);
+  line-height: 1.12;
+  font-weight: 900;
+  color: var(--kids-ink);
+}
+
+.kids-hero-copy p {
+  margin: 0;
+  font-size: clamp(1rem, 1.25vw, 1.14rem);
+  color: var(--kids-muted);
+  line-height: 1.58;
+}
+
+.kids-hero-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.kids-highlight-pill {
+  background: #fdfbf6;
+  border: 1px solid var(--kids-line);
+  border-radius: 16px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.kids-highlight-pill strong {
+  font-size: 0.92rem;
+  color: var(--kids-ink);
+}
+
+.kids-highlight-pill small {
+  font-size: 0.78rem;
+  color: var(--kids-muted);
+}
+
+.kids-hero-art {
+  background: radial-gradient(circle at 50% 45%, rgba(251, 231, 198, 0.7) 0%, rgba(238, 247, 239, 0.6) 65%, #ffffff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 34px 24px;
+  border-left: 1px solid rgba(222, 216, 202, 0.6);
+  text-align: center;
+  gap: 14px;
+}
+
+.kids-hero-art img {
+  width: min(220px, 82%);
+  height: auto;
+  filter: drop-shadow(0 12px 24px rgba(47, 112, 72, 0.16));
+}
+
+.kids-mascot-speech {
+  background: #ffffff;
+  border: 1.5px solid rgba(47, 112, 72, 0.25);
+  border-radius: 18px;
+  padding: 12px 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--kids-ink);
+  max-width: 260px;
+  box-shadow: 0 8px 20px rgba(26, 38, 31, 0.06);
+}
+
+.kids-feature-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.kids-feature-box {
+  background: #ffffff;
+  border: 1px solid var(--kids-line);
+  border-radius: 22px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(26, 38, 31, 0.04);
+}
+
+.kids-feature-box .feature-icon {
+  font-size: 1.85rem;
+}
+
+.kids-feature-box strong {
+  font-size: 1.05rem;
+  color: var(--kids-ink);
+}
+
+.kids-feature-box p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--kids-muted);
+  line-height: 1.48;
+}
+
+/* Age Mode Selection Screen */
+.kids-section-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid var(--kids-line);
+  border-radius: 28px;
+  padding: clamp(24px, 4vw, 42px);
+  box-shadow: var(--kids-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kids-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.kids-mode-card {
+  position: relative;
+  border: 2.5px solid var(--kids-line);
+  border-radius: 24px;
+  background: linear-gradient(180deg, #ffffff 0%, #fcfbf7 100%);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kids-mode-card:hover,
+.kids-mode-card:focus-within {
+  transform: translateY(-3px);
+  border-color: var(--kids-leaf);
+  box-shadow: 0 18px 40px rgba(47, 112, 72, 0.13);
+}
+
+.kids-mode-card.mode-explorer {
+  background: linear-gradient(180deg, #fffdf8 0%, #fff7e9 100%);
+  border-color: rgba(213, 164, 107, 0.55);
+}
+
+.kids-mode-card.mode-changemaker {
+  background: linear-gradient(180deg, #f9fdfb 0%, #eef7f1 100%);
+  border-color: rgba(47, 112, 72, 0.4);
+}
+
+.kids-mode-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.kids-mode-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  background: #ffffff;
+  border: 1px solid var(--kids-line);
+  box-shadow: 0 6px 16px rgba(26, 38, 31, 0.06);
+}
+
+.kids-mode-card h3 {
+  margin: 8px 0 6px;
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: var(--kids-ink);
+}
+
+.kids-mode-card p {
+  margin: 0;
+  color: var(--kids-muted);
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
+.kids-mode-list {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  color: var(--kids-ink);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  font-weight: 600;
+}
+
+/* Mode Intro & Optional Student Profile Form */
+.kids-intro-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.kids-optional-box {
+  background: #fbfaf5;
+  border: 1.5px solid var(--kids-line);
+  border-radius: 22px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kids-optional-box h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.kids-optional-tag {
+  font-size: 0.76rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--kids-leaf-soft);
+  color: var(--kids-leaf);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.kids-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kids-field-group label {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--kids-ink);
+}
+
+.kids-input,
+.kids-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--kids-line);
+  border-radius: 14px;
+  background: #ffffff;
+  color: var(--kids-ink);
+  font-size: 0.98rem;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.kids-input:focus,
+.kids-select:focus {
+  border-color: var(--kids-leaf);
+  box-shadow: 0 0 0 3px rgba(47, 112, 72, 0.14);
+}
+
+.kids-input.input-invalid {
+  border-color: #dc2626;
+  background: #fef2f2;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.kids-field-error {
+  color: #b91c1c;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+.kids-option-hint {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--kids-muted);
+}
+
+.kids-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Progress Header */
+.kids-progress-panel {
+  background: #ffffff;
+  border: 1.5px solid var(--kids-line);
+  border-radius: 22px;
+  padding: 16px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(26, 38, 31, 0.04);
+}
+
+.kids-progress-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.kids-stage-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kids-stage-chip.stage-mission {
+  background: var(--kids-gold-soft);
+  color: var(--kids-amber);
+  border: 1px solid rgba(213, 164, 107, 0.45);
+}
+
+.kids-stage-chip.stage-quest {
+  background: var(--kids-leaf-soft);
+  color: var(--kids-leaf);
+  border: 1px solid rgba(47, 112, 72, 0.35);
+}
+
+.kids-progress-counter {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--kids-muted);
+}
+
+.kids-segmented-bar {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.kids-bar-segment {
+  height: 11px;
+  background: #ece8dc;
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.kids-bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 260ms ease;
+}
+
+.kids-bar-fill.fill-mission {
+  background: linear-gradient(90deg, #d5a46b, #e8b86d);
+}
+
+.kids-bar-fill.fill-quest {
+  background: linear-gradient(90deg, #2f7048, #6ca965);
+}
+
+.kids-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--kids-muted);
+}
+
+/* Interactive Activity Card (Missions & Scored Questions) */
+.kids-activity-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid var(--kids-line);
+  border-radius: 28px;
+  padding: clamp(20px, 2.8vw, 32px);
+  box-shadow: var(--kids-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.kids-activity-split {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+
+.kids-activity-left {
+  position: sticky;
+  top: 92px;
+  min-width: 0;
+}
+
+.kids-activity-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.kids-activity-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kids-meta-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.kids-topic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  background: #f5f3eb;
+  color: var(--kids-ink);
+}
+
+.kids-dim-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  background: var(--kids-leaf-soft);
+  color: var(--kids-leaf);
+}
+
+.kids-activity-title {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+  line-height: 1.25;
+  font-weight: 900;
+  color: var(--kids-ink);
+}
+
+.kids-activity-subtitle {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--kids-muted);
+  line-height: 1.5;
+}
+
+/* Interactive Visual Scene Stage */
+.kids-scene-stage {
+  width: 100%;
+  border: 1.5px solid rgba(47, 112, 72, 0.22);
+  border-radius: 22px;
+  background: linear-gradient(180deg, #f8fcf9 0%, #fffdf8 100%);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kids-scene-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.kids-scene-prompt {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--kids-leaf);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kids-scene-meter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid var(--kids-line);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.kids-scene-meter-bar {
+  width: 88px;
+  height: 10px;
+  border-radius: 999px;
+  background: #e9e5da;
+  overflow: hidden;
+  position: relative;
+}
+
+.kids-scene-meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2f7048 0%, #56ab2f 50%, #a8e063 100%);
+  background-size: 200% 100%;
+  border-radius: 999px;
+  transition: width 480ms cubic-bezier(0.22, 1, 0.36, 1), background 300ms ease;
+  animation: kidsMeterShimmer 2.4s linear infinite;
+}
+
+.kids-scene-meter-fill.meter-tier-optimal {
+  background: linear-gradient(90deg, #1f6e43 0%, #38ef7d 50%, #11998e 100%);
+  background-size: 200% 100%;
+}
+
+.kids-scene-meter-fill.meter-tier-good {
+  background: linear-gradient(90deg, #2f7048 0%, #7ec850 50%, #56ab2f 100%);
+  background-size: 200% 100%;
+}
+
+.kids-scene-meter-fill.meter-tier-learn {
+  background: linear-gradient(90deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+  background-size: 200% 100%;
+}
+
+.kids-scene-canvas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 150px;
+  padding: 18px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px dashed rgba(47, 112, 72, 0.28);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kids-scene-canvas.scene-canvas-active {
+  background: linear-gradient(135deg, rgba(235, 247, 238, 0.92) 0%, rgba(255, 251, 235, 0.92) 100%);
+  border-style: solid;
+  border-color: rgba(47, 112, 72, 0.45);
+  box-shadow: inset 0 0 24px rgba(47, 112, 72, 0.06);
+}
+
+.scene-widget-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 20px;
+  border-radius: 18px;
+  border: 2px solid var(--kids-line);
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: var(--kids-ink);
+  position: relative;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(26, 38, 31, 0.05);
+}
+
+.scene-widget-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--kids-leaf);
+  box-shadow: 0 10px 22px rgba(47, 112, 72, 0.14);
+}
+
+.scene-widget-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.scene-widget-btn.active {
+  background: var(--kids-leaf-soft);
+  border-color: var(--kids-leaf);
+  color: var(--kids-leaf);
+  box-shadow: 0 10px 24px rgba(47, 112, 72, 0.16);
+  animation: kidsScenePulse 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.scene-widget-hint {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: #f3f0e6;
+  color: var(--kids-muted);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.scene-widget-btn.active .scene-widget-hint {
+  background: rgba(47, 112, 72, 0.15);
+  color: var(--kids-leaf);
+}
+
+.scene-widget-emoji {
+  font-size: 2.2rem;
+  line-height: 1.1;
+  display: inline-block;
+  animation: kidsEmojiFloat 2.6s ease-in-out infinite;
+}
+
+.scene-widget-btn.active .scene-widget-emoji {
+  animation: kidsEmojiCelebrate 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.scene-status-readout {
+  font-size: 0.93rem;
+  font-weight: 700;
+  color: var(--kids-ink);
+  text-align: center;
+  max-width: 380px;
+  line-height: 1.45;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.kids-scene-canvas.scene-canvas-active .scene-status-readout {
+  color: #1c4d30;
+  animation: kidsPopIn 0.32s ease-out;
+}
+
+/* Question Option Cards (A, B, C, D) */
+.kids-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.kids-option-btn {
+  min-height: 78px;
+  border: 2px solid var(--kids-line);
+  border-radius: 20px;
+  background: #ffffff;
+  padding: 16px 18px;
+  display: grid;
+  grid-template-columns: 40px 1fr 28px;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  overflow: visible;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.kids-option-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.01);
+  border-color: var(--kids-leaf-mid);
+  box-shadow: 0 12px 26px rgba(26, 38, 31, 0.08);
+}
+
+.kids-option-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.kids-option-btn.selected {
+  border-color: var(--kids-leaf);
+  background: var(--kids-leaf-soft);
+  box-shadow: 0 12px 28px rgba(47, 112, 72, 0.16), 0 0 0 3px rgba(47, 112, 72, 0.12);
+}
+
+.kids-option-btn.just-picked {
+  animation: kidsOptionPop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.kids-option-btn:disabled {
+  cursor: default;
+}
+
+.kids-option-letter {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: #f5f2e9;
+  color: var(--kids-ink);
+  font-weight: 900;
+  font-size: 1.05rem;
+  display: grid;
+  place-items: center;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.18s ease, color 0.18s ease;
+}
+
+.kids-option-btn.selected .kids-option-letter {
+  background: var(--kids-leaf);
+  color: #ffffff;
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.kids-option-text {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--kids-ink);
+  line-height: 1.38;
+}
+
+.kids-option-check {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--kids-line);
+  display: grid;
+  place-items: center;
+  color: transparent;
+  font-weight: 900;
+  font-size: 0.85rem;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.18s ease, border-color 0.18s ease;
+}
+
+.kids-option-btn.selected .kids-option-check {
+  background: var(--kids-leaf);
+  border-color: var(--kids-leaf);
+  color: #ffffff;
+  animation: kidsCheckPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Floating Green Points Badge & Eco Particles on Option Selection */
+.kids-floating-points {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: #ffffff;
+  background: linear-gradient(135deg, #1f6e43 0%, #38a169 100%);
+  box-shadow: 0 10px 24px rgba(31, 110, 67, 0.28);
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  animation: kidsFloatUpFade 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.kids-floating-points.points-tier-learn {
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+  box-shadow: 0 10px 24px rgba(217, 119, 6, 0.25);
+}
+
+.kids-eco-particle {
+  position: fixed;
+  z-index: 9998;
+  pointer-events: none;
+  font-size: 1.25rem;
+  line-height: 1;
+  user-select: none;
+  animation: kidsParticleBurst 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.kids-score-bump {
+  animation: kidsScoreBump 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.kids-card-enter {
+  animation: kidsCardSlideIn 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Encouraging Feedback Card (After Locking Answer) */
+.kids-feedback-banner {
+  border-radius: 22px;
+  padding: 18px 22px;
+  background: linear-gradient(135deg, #eef7ef 0%, #fff9ec 100%);
+  border: 2px solid rgba(47, 112, 72, 0.32);
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 16px;
+  align-items: center;
+  animation: kidsFeedbackUnfurl 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kids-feedback-mascot {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1.5px solid rgba(47, 112, 72, 0.25);
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  animation: kidsMascotBounce 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.kids-feedback-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kids-feedback-title {
+  font-size: 1.02rem;
+  font-weight: 900;
+  color: var(--kids-leaf);
+}
+
+.kids-feedback-explanation {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--kids-ink);
+  line-height: 1.48;
+}
+
+/* Footprint Mission Controls */
+.mission-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mission-block {
+  background: #fbfaf5;
+  border: 1.5px solid var(--kids-line);
+  border-radius: 20px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mission-block-label {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--kids-ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mission-block-helper {
+  font-size: 0.84rem;
+  color: var(--kids-muted);
+  margin: -4px 0 0;
+}
+
+.mission-tile-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 10px;
+}
+
+.mission-choice-tile {
+  border: 2px solid var(--kids-line);
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.16s ease;
+}
+
+.mission-choice-tile:hover {
+  border-color: var(--kids-leaf-mid);
+  transform: translateY(-1px);
+}
+
+.mission-choice-tile.selected {
+  border-color: var(--kids-leaf);
+  background: var(--kids-leaf-soft);
+  box-shadow: 0 6px 18px rgba(47, 112, 72, 0.1);
+}
+
+.mission-choice-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.mission-choice-tile strong {
+  font-size: 0.88rem;
+  color: var(--kids-ink);
+}
+
+.mission-choice-tile small {
+  font-size: 0.74rem;
+  color: var(--kids-muted);
+}
+
+.mission-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.mission-slider-row input[type="range"] {
+  flex: 1;
+  min-width: 180px;
+  accent-color: var(--kids-leaf);
+}
+
+.mission-number-badge {
+  min-width: 110px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1.5px solid var(--kids-leaf);
+  color: var(--kids-leaf);
+  font-weight: 900;
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+.mission-days-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mission-day-pill {
+  min-width: 52px;
+  height: 44px;
+  border-radius: 12px;
+  border: 2px solid var(--kids-line);
+  background: #ffffff;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mission-day-pill.selected {
+  background: var(--kids-leaf);
+  border-color: var(--kids-leaf);
+  color: #ffffff;
+}
+
+.mission-allocation-callout {
+  background: #eef7ef;
+  border: 1px solid rgba(47, 112, 72, 0.3);
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 0.88rem;
+  color: var(--kids-ink);
+  line-height: 1.45;
+}
+
+/* Results Dashboard */
+.kids-results-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kids-results-hero {
+  background: linear-gradient(135deg, #f3faf4 0%, #fffdf7 60%, #fff6e8 100%);
+  border: 2px solid rgba(47, 112, 72, 0.3);
+  border-radius: 28px;
+  padding: clamp(26px, 4vw, 44px);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  align-items: center;
+  box-shadow: var(--kids-shadow);
+}
+
+.kids-score-dial-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 2px solid rgba(47, 112, 72, 0.22);
+  border-radius: 26px;
+  padding: 26px;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(47, 112, 72, 0.1);
+}
+
+.kids-score-ring {
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  background: conic-gradient(var(--kids-leaf) var(--kids-score-deg, 240deg), #e9e5da 0deg);
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+}
+
+.kids-score-ring-inner {
+  width: 136px;
+  height: 136px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.kids-score-ring-inner strong {
+  font-size: 2.5rem;
+  line-height: 1;
+  font-weight: 900;
+  color: var(--kids-leaf);
+}
+
+.kids-score-ring-inner span {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--kids-muted);
+  margin-top: 4px;
+}
+
+.kids-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.kids-dash-card {
+  background: #ffffff;
+  border: 1.5px solid var(--kids-line);
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: 0 10px 28px rgba(26, 38, 31, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.kids-dash-card.full-span {
+  grid-column: 1 / -1;
+}
+
+.kids-dash-card h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--kids-ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.kids-dim-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kids-dim-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kids-dim-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.94rem;
+  font-weight: 800;
+}
+
+.kids-dim-track {
+  height: 12px;
+  border-radius: 999px;
+  background: #ece8dc;
+  overflow: hidden;
+}
+
+.kids-dim-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2f7048, #6eb362);
+  transition: width 400ms ease;
+}
+
+/* Badges Grid */
+.kids-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 14px;
+}
+
+.kids-badge-card {
+  border: 2px solid var(--kids-line);
+  border-radius: 20px;
+  padding: 16px 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: #fcfbf8;
+}
+
+.kids-badge-card.unlocked {
+  border-color: rgba(47, 112, 72, 0.45);
+  background: linear-gradient(180deg, #f3fbf4 0%, #ffffff 100%);
+  box-shadow: 0 8px 20px rgba(47, 112, 72, 0.08);
+}
+
+.kids-badge-card.locked {
+  opacity: 0.68;
+}
+
+.kids-badge-emoji {
+  font-size: 2.2rem;
+}
+
+.kids-badge-card strong {
+  font-size: 0.95rem;
+  color: var(--kids-ink);
+}
+
+.kids-badge-card p {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--kids-muted);
+  line-height: 1.35;
+}
+
+.kids-badge-status {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--kids-leaf-soft);
+  color: var(--kids-leaf);
+}
+
+/* Carbon Footprint Summary Table / Cards */
+.kids-fp-summary-banner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  background: #fbfaf5;
+  border: 1.5px solid var(--kids-line);
+  border-radius: 20px;
+  padding: 18px;
+}
+
+.kids-fp-kpi {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kids-fp-kpi strong {
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: var(--kids-ink);
+}
+
+.kids-fp-kpi span {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--kids-muted);
+}
+
+.kids-fp-row {
+  border: 1px solid var(--kids-line);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #ffffff;
+}
+
+.kids-fp-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.kids-fp-row-head strong {
+  font-size: 0.98rem;
+  color: var(--kids-ink);
+}
+
+.kids-fp-status-chip {
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #eef7ef;
+  color: var(--kids-leaf);
+}
+
+.kids-fp-status-chip.incomplete {
+  background: #fff6e8;
+  color: var(--kids-amber);
+}
+
+.kids-fp-assumptions {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--kids-muted);
+  line-height: 1.45;
+}
+
+/* Recommendations List */
+.kids-rec-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.kids-rec-card {
+  border: 1.5px solid rgba(47, 112, 72, 0.25);
+  border-radius: 18px;
+  padding: 16px 18px;
+  background: linear-gradient(180deg, #f9fdf9 0%, #ffffff 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kids-rec-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.kids-rec-cat {
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--kids-leaf);
+}
+
+.kids-rec-priority {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--kids-gold-soft);
+  color: var(--kids-amber);
+}
+
+.kids-rec-card p {
+  margin: 0;
+  font-size: 0.94rem;
+  color: var(--kids-ink);
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.kids-methodology-note {
+  background: #fbfaf5;
+  border: 1px solid var(--kids-line);
+  border-radius: 18px;
+  padding: 16px 20px;
+  font-size: 0.83rem;
+  color: var(--kids-muted);
+  line-height: 1.55;
+}
+
+@keyframes kidsPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes kidsOptionPop {
+  0% {
+    transform: scale(0.96);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes kidsCheckPop {
+  0% {
+    transform: scale(0.4) rotate(-25deg);
+  }
+  70% {
+    transform: scale(1.2) rotate(6deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes kidsScenePulse {
+  0% {
+    transform: scale(0.95);
+  }
+  55% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes kidsEmojiFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(3deg);
+  }
+}
+
+@keyframes kidsEmojiCelebrate {
+  0% {
+    transform: scale(0.75) rotate(-12deg);
+  }
+  55% {
+    transform: scale(1.22) rotate(8deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes kidsMeterShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes kidsFloatUpFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20%) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -75%) scale(1.06);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -210%) scale(0.95);
+  }
+}
+
+@keyframes kidsParticleBurst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+  }
+  70% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, -60px))) scale(1.15) rotate(var(--rot, 45deg));
+  }
+}
+
+@keyframes kidsScoreBump {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes kidsCardSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes kidsFeedbackUnfurl {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes kidsMascotBounce {
+  0% {
+    transform: scale(0.6) rotate(-10deg);
+  }
+  65% {
+    transform: scale(1.14) rotate(5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 960px) {
+  .kids-activity-split {
+    grid-template-columns: 1fr;
+  }
+
+  .kids-activity-left {
+    position: static;
+  }
+}
+
+@media (max-width: 820px) {
+  .kids-hero-card,
+  .kids-mode-grid,
+  .kids-intro-grid,
+  .kids-options-grid,
+  .kids-results-hero,
+  .kids-dashboard-grid,
+  .kids-rec-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kids-hero-art {
+    border-left: none;
+    border-top: 1px solid rgba(222, 216, 202, 0.6);
+  }
+
+  .kids-feature-grid,
+  .kids-hero-highlights,
+  .kids-fp-summary-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .kids-segmented-bar {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reduced Motion Respect */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

@@ -1,5 +1,30 @@
+# Environment & credentials
 .env
 .carbon-quest-drive-token.json
 node_modules/
 GreenQuest-GitHub-Upload.zip
 GreenQuest-GitHub-Upload/
+
+# Excel spreadsheets & data templates
+*.xlsx
+*.xls
+*.csv
+
+# Backup archives & editor backups
+*.zip
+*.bak
+*.swp
+
+# Redundant duplicate assets
+Kid-Labs/assets_extracted/
+
+# Temporary, scratch & dump files
+tmp/
+*.txt
+!README.md
+!Kid-Labs/README.md
+
+# OS / Editor clutter
+Thumbs.db
+.DS_Store
+.vscode/

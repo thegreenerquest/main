@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Carbon Credit | Green Score Quiz</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <main class="app-shell">
+    <section class="hero" aria-labelledby="app-title">
+      <img class="hero-image" src="assets/hero-eco-city.png"
+        alt="Illustrated eco city with transit, solar rooftops, groceries, and greenery" />
+      <div class="hero-overlay"></div>
+      <nav class="topbar" aria-label="Primary">
+        <a class="brand-mark" href="index.html" aria-label="My Carbon Credit home">
+          <img class="brand-logo full-brand-logo" src="assets/Data Leaf.png" alt="My Carbon Credit" />
+        </a>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <a class="ghost-button" href="../index.html" style="font-size:0.88rem;">&larr; GreenerQuest Home</a>
+          <a class="ghost-button" href="dashboard.html" style="font-size:0.88rem;">&#127758; Dashboard</a>
+          <span class="ghost-button" style="cursor: default; pointer-events: none;">Welcome User</span>
+        </div>
+      </nav>
+      <div class="hero-copy">
+        <p class="eyebrow">Green Score Challenge</p>
+        <h1 id="app-title">Discover your carbon score through a playful quiz.</h1>
+        <p>
+          Answer lifestyle, mobility, food, home energy, and sustainability questions. Earn green points,
+          unlock badges, and finish with a simple footprint breakdown and recommendations.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-button" href="quiz.html" onclick="localStorage.removeItem('mccQuizState'); localStorage.removeItem('mccCurrentResponseId');">Begin</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-feature-band" aria-label="Quiz highlights">
+      <article>
+        <span>01</span>
+        <h2>Play the quiz</h2>
+        <p>Move through one question at a time without feeling like you are filling a long survey.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h2>Unlock rewards</h2>
+        <p>Earn XP points, carbon awareness score, and badges after every completed section.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h2>See your score</h2>
+        <p>Get a monthly footprint estimate with category breakdown and practical next steps.</p>
+      </article>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-title">
+      <div class="about-content">
+        <h2 id="about-title">About MyCarbonCredit</h2>
+        <p>
+          At MyCarbonCredit, we believe that sustainability begins with awareness and grows through action. Our mission
+          is to empower individuals and organizations to understand, manage, and reduce their environmental impact
+          through data-driven carbon footprint assessment and carbon offset solutions.
+        </p>
+        <p>
+          We are developing a digital platform that helps users measure their carbon footprint based on everyday
+          activities such as transportation, home energy consumption, lifestyle choices, and workplace practices. By
+          transforming complex environmental data into meaningful insights, we aim to make sustainability accessible,
+          measurable, and actionable.
+        </p>
+
+        <h3>What We Do</h3>
+        <p>Our platform enables users to:</p>
+        <ul>
+          <li>Assess their carbon footprint through a simple and interactive questionnaire</li>
+          <li>Understand the key contributors to their emissions</li>
+          <li>Receive personalized recommendations for reducing their environmental impact</li>
+          <li>Explore carbon offset opportunities through afforestation, renewable energy, and verified carbon credit
+            initiatives</li>
+          <li>Track sustainability progress over time</li>
+        </ul>
+
+        <p>
+          For organizations, the platform provides employee-level sustainability analytics that can support ESG
+          reporting, sustainability initiatives, and carbon reduction strategies.
+        </p>
+        <p class="privacy-note">
+          All information provided will be used solely for research and analytical purposes, and findings will be
+          reported only in aggregated and anonymized form. Individual responses will remain confidential and will not be
+          shared with third parties. 🌍
+        </p>
+        <div class="hero-actions" style="margin-top: 32px;">
+          <a class="primary-button" href="quiz.html" onclick="localStorage.removeItem('mccQuizState'); localStorage.removeItem('mccCurrentResponseId');">Begin</a>
+        </div>
+      </div>
+    </section>
+    <section class="hero footer-hero" aria-labelledby="footer-title">
+      <img class="hero-image" src="assets/hero-eco-city.png"
+        alt="Illustrated eco city with transit, solar rooftops, groceries, and greenery" />
+      <div class="hero-overlay"></div>
+      <footer class="site-footer">
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Legal &amp; Privacy</h3>
+            <a href="priv-policy-footer.html">Privacy Policy</a>
+            <a href="tnc-footer.html">Terms &amp; Conditions</a>
+            <a href="cookie-policy.html">Cookie Policy</a>
+            <a href="data-deletion-footer.html">Data Deletion Request</a>
+          </div>
+
+          <div class="footer-section">
+            <h3>Information</h3>
+            <a href="transparency-carbon-methodology.html">Carbon Calculation Methodology</a>
+            <a href="dpdp-compliance-footer.html">DPDP Act Compliance</a>
+            <a href="disclaimer.html">Disclaimer</a>
+          </div>
+
+          <div class="footer-section">
+            <h3>Contact</h3>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+      </footer>
+    </section>
+  </main>
+</body>
+
+</html>

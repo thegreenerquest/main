@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Carbon Credit | Green Score Quiz</title>
+  <link rel="stylesheet" href="quiz.css?v=2" />
+</head>
+
+<body>
+  <main class="quiz-shell">
+    <header class="quiz-header">
+      <a class="brand" href="index.html" aria-label="My Carbon Credit home">
+        <img class="quiz-full-logo" src="assets/Data Leaf.png" alt="My Carbon Credit" />
+      </a>
+      <div class="header-actions">
+        <div class="wallet-pill" id="walletPill" aria-label="Green points wallet">
+          <span class="wallet-icon" aria-hidden="true">🌱</span>
+          <strong id="walletPoints">0</strong>
+          <span>Green Points</span>
+        </div>
+        <div class="login-button" id="loginButton" style="display:inline-flex; align-items:center; justify-content:center; cursor:default; pointer-events:none; padding: 0 24px;">Welcome User</div>
+      </div>
+    </header>
+
+    <section class="landing-screen" id="landingScreen">
+      <div class="landing-hero">
+        <div class="landing-copy">
+          <p class="section-kicker">Green Score Challenge</p>
+          <h1>Turn your daily choices into a carbon score adventure.</h1>
+          <p>
+            Play through lifestyle, mobility, home energy, food, digital habits, and workplace ESG missions.
+            Unlock badges after every section and finish with a personal footprint score.
+          </p>
+          <div class="landing-actions">
+            <button class="nav-button next-button" id="startQuizButton" type="button">Lets Play →</button>
+            <a class="nav-button back-button" href="index.html">View main site</a>
+          </div>
+        </div>
+        <div class="mission-board" aria-label="Quiz rewards preview">
+          <div class="score-preview earning-preview">
+            <div class="wallet-hero-art" aria-hidden="true">
+              <div class="wallet-slideshow">
+                <img src="assets/Brownwallet.png" alt="Brown Wallet" class="wallet-slide slide-1" />
+                <img src="assets/Greenwallet.png" alt="Green Wallet" class="wallet-slide slide-2" />
+              </div>
+            </div>
+            <div class="earning-copy">
+              <small>Total Balance</small>
+              <span class="flicker-val-container">
+                <span class="flicker-val f-brown">5</span>
+                <span class="flicker-val f-green" id="waitingPoints">500</span>
+              </span>
+              <strong>Green Points waiting in your wallet</strong>
+            </div>
+            <div class="wallet-stats" aria-label="Wallet preview stats">
+              <span><strong class="flicker-val-container">
+                <span class="flicker-val f-brown">10</span>
+                <span class="flicker-val f-green">1,250</span>
+              </strong> Lifetime</span>
+              <span><strong class="flicker-val-container">
+                <span class="flicker-val f-brown">5</span>
+                <span class="flicker-val f-green">150</span>
+              </strong> This Month</span>
+              <span><strong class="flicker-val-container">
+                <span class="flicker-val f-brown">#1,054</span>
+                <span class="flicker-val f-green">#23</span>
+              </strong> Rank</span>
+            </div>
+          </div>
+          <div class="mission-tiles-row">
+            <div class="mission-tile active">
+              <strong>🌱 XP Points</strong>
+              <span>Earn after every section</span>
+            </div>
+            <div class="mission-tile active">
+              <strong>🌍 Awareness Score</strong>
+              <span>Build your carbon literacy</span>
+            </div>
+            <div class="mission-tile active">
+              <strong>🏆 Badge Unlocks</strong>
+              <span>Collect 9 milestone badges</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-preview">
+        <article>
+          <span>01</span>
+          <strong>Profile</strong>
+          <small>Lifestyle, city, household, pets</small>
+        </article>
+        <article>
+          <span>02</span>
+          <strong>Mobility</strong>
+          <small>Commute, fuel, flights, travel days</small>
+        </article>
+        <article>
+          <span>03</span>
+          <strong>Home Energy</strong>
+          <small>AC, appliances, cooking, tech</small>
+        </article>
+        <article>
+          <span>04</span>
+          <strong>Choices</strong>
+          <small>Food, digital life, ESG, reflections</small>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Age Group Selection ("Choose Your Green Journey") =====
+         Opened by "Lets Play". Individual (21+) runs the existing quiz via startQuiz();
+         Young Adults (15–20) and Kids (8–14) open their own modules. Logic: age-selection.js -->
+    <section class="age-selection-screen" id="ageSelectionScreen" aria-labelledby="ageSelectionTitle" hidden>
+      <div class="age-header-row">
+        <button class="nav-button back-button age-back-button" id="ageBackButton" type="button">
+          <span aria-hidden="true">&larr;</span>
+          Back
+        </button>
+      </div>
+
+      <div class="age-intro">
+        <p class="section-kicker">Green Score Challenge</p>
+        <h2 class="age-title" id="ageSelectionTitle" tabindex="-1">Choose Your Green Journey</h2>
+        <p class="age-subtitle">Discover your environmental impact through an experience designed for your age group.</p>
+      </div>
+
+      <ul class="age-card-grid" role="list">
+        <li class="age-card age-card--individual">
+          <div class="age-card-art">
+            <img src="assets/journeys/individual.svg" alt="" width="160" height="120" />
+          </div>
+          <div class="age-card-body">
+            <div class="age-card-meta">
+              <span class="age-chip" id="ageIndividualRange">Ages 21+</span>
+              <span class="age-status">Available now</span>
+            </div>
+            <h3 class="age-card-title"><span class="age-card-brand">MyCarbonCredit</span> Individual</h3>
+            <p class="age-card-copy" id="ageIndividualDesc">Discover your personal carbon footprint, understand your lifestyle impact and receive personalised sustainability recommendations.</p>
+            <button class="nav-button next-button age-card-cta" id="exploreIndividualButton" type="button"
+              data-journey="individual" aria-describedby="ageIndividualRange ageIndividualDesc">
+              Explore Individual <span aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+        </li>
+
+        <li class="age-card age-card--young">
+          <div class="age-card-art">
+            <img src="assets/journeys/young-adults.svg" alt="" width="160" height="120" />
+          </div>
+          <div class="age-card-body">
+            <div class="age-card-meta">
+              <span class="age-chip" id="ageYoungAdultsRange">Ages 15–20</span>
+              <span class="age-status">Coming soon</span>
+            </div>
+            <h3 class="age-card-title"><span class="age-card-brand">MyCarbonCredit</span> Young Adults</h3>
+            <p class="age-card-copy" id="ageYoungAdultsDesc">Explore climate change, carbon emissions, sustainable lifestyles and meaningful climate action through interactive challenges.</p>
+            <a class="nav-button next-button age-card-cta" id="exploreYoungAdultsButton" href="young-adults/index.html"
+              data-journey="youngAdults" aria-describedby="ageYoungAdultsRange ageYoungAdultsDesc">
+              Explore Young Adults <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </li>
+
+        <li class="age-card age-card--kids">
+          <div class="age-card-art">
+            <img src="assets/journeys/kids.svg" alt="" width="160" height="120" />
+          </div>
+          <div class="age-card-body">
+            <div class="age-card-meta">
+              <span class="age-chip" id="ageKidsRange">Ages 8–14</span>
+              <span class="age-status">Available now</span>
+            </div>
+            <h3 class="age-card-title"><span class="age-card-brand">MyCarbonCredit</span> Kids</h3>
+            <p class="age-card-copy" id="ageKidsDesc">Learn about nature, energy, water conservation and protecting our planet through fun quizzes and interactive activities.</p>
+            <a class="nav-button next-button age-card-cta" id="exploreKidsButton" href="kids/index.html"
+              data-journey="kids" aria-describedby="ageKidsRange ageKidsDesc">
+              Explore Kids <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+
+      <p class="age-footnote">Age groups: 8–14 &middot; 15–20 &middot; 21+. Pick the one that fits you best.</p>
+    </section>
+
+    <section class="quiz-stage" aria-live="polite" hidden>
+      <div class="quiz-progress">
+        <span id="questionCounter">Question 1 of 10</span>
+        <div class="progress-track"><span id="progressBar"></span></div>
+      </div>
+
+      <article class="question-card">
+        <p class="section-kicker" id="sectionName">Profile</p>
+        <h1 id="questionTitle">How do you work?</h1>
+        <p id="questionHelp">Let's understand your work setup.</p>
+
+        <div id="answerArea" class="answer-area"></div>
+      </article>
+
+      <nav class="quiz-actions" aria-label="Quiz navigation">
+        <button class="nav-button back-button" id="backButton" type="button">
+          <span aria-hidden="true">&larr;</span>
+          Back
+        </button>
+        <button class="nav-button next-button" id="nextButton" type="button" disabled>
+          Next
+          <span aria-hidden="true">&rarr;</span>
+        </button>
+      </nav>
+    </section>
+
+    <section class="reward-screen" id="rewardScreen" hidden aria-live="polite">
+      <!-- Full screen rain canvas -->
+      <canvas class="reward-rain-canvas" id="rewardRainCanvas" aria-hidden="true"></canvas>
+      
+
+
+      <div class="reward-card">
+        <button class="close-card-button" id="quitFromRewardButton" type="button" aria-label="Close quiz">&times;</button>
+        <p class="section-kicker" id="rewardSection">Section Completed</p>
+        <h1>Section Completed!</h1>
+        <div class="reward-metrics-grid">
+          <!-- Green Points Tile -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front reward-tile">
+                <span class="front-label">Green Points</span>
+                <span class="tile-icon large">🌱</span>
+              </div>
+              <div class="flip-card-back reward-tile">
+                <span id="rewardXpBack">50</span>
+                <small>Points earned</small>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Awareness Score Tile -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front reward-tile">
+                <span class="front-label">Awareness Score</span>
+                <span class="tile-icon large">🌍</span>
+              </div>
+              <div class="flip-card-back reward-tile">
+                <span id="rewardAwarenessBack">10</span>
+                <small>Profile sharpened</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badge Tile -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front reward-tile">
+                <span class="front-label">Current Tier</span>
+                <span class="tile-icon large">🏅</span>
+              </div>
+              <div class="flip-card-back reward-tile">
+                <span id="rewardBadgeBack" style="font-size: clamp(1rem, 2.2vw, 1.3rem);">Brass Tier</span>
+                <span class="tile-icon large" id="rewardBadgeIcon">🏅</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reward-actions">
+          <button class="nav-button next-button" id="continueButton" type="button">Continue &rarr;</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="login-screen" id="loginScreen" hidden>
+      <div class="login-card">
+        <p class="section-kicker">Save Your Score</p>
+        <h1>Tell us who you are.</h1>
+        <p class="login-copy">Enter your name and email to save your progress and download your carbon score certificate.</p>
+        <div class="user-details-form" style="display:flex; flex-direction:column; gap:12px; margin: 16px 0; text-align:left;">
+          <label style="font-weight:600; display:flex; flex-direction:column; gap:4px;">
+            Your Name
+            <input type="text" id="userNameInput" placeholder="e.g. Jane Doe" style="padding:10px; border:1.5px solid var(--line); border-radius:12px; font-size:1rem; outline:none;" required>
+            <span id="nameError" style="color:#d93025; font-size:0.85rem; font-weight:500; display:none;"></span>
+          </label>
+          <label style="font-weight:600; display:flex; flex-direction:column; gap:4px;">
+            Email Address
+            <input type="email" id="userEmailInput" placeholder="e.g. jane@example.com" style="padding:10px; border:1.5px solid var(--line); border-radius:12px; font-size:1rem; outline:none;" required>
+            <span id="emailError" style="color:#d93025; font-size:0.85rem; font-weight:500; display:none;"></span>
+          </label>
+          <label style="font-weight:600; display:flex; flex-direction:column; gap:4px;">
+            Age Group
+            <select id="userAgeInput" style="padding:10px; border:1.5px solid var(--line); border-radius:12px; font-size:1rem; outline:none; background-color: white; color: var(--ink);" required>
+              <option value="" disabled selected>Select your age group</option>
+              <option value="Under 18">Under 18</option>
+              <option value="18-24">18–24</option>
+              <option value="25-34">25–34</option>
+              <option value="35-44">35–44</option>
+              <option value="45-54">45–54</option>
+              <option value="55-64">55–64</option>
+              <option value="65+">65+</option>
+            </select>
+            <span id="ageError" style="color:#d93025; font-size:0.85rem; font-weight:500; display:none;"></span>
+          </label>
+          <button class="nav-button next-button" id="saveUserDetailsButton" type="button" style="width:100%; justify-content:center; margin-top:8px;">Save & Download</button>
+        </div>
+        <div class="login-actions">
+          <button class="nav-button back-button" id="backFromLoginButton" type="button">Go back</button>
+          <a class="nav-button back-button" href="index.html">Home page</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="feedback-screen" id="feedbackScreen" hidden>
+      <div class="login-card feedback-card">
+        <p class="section-kicker">Before you close</p>
+        <h1>Close this quiz?</h1>
+        <p class="login-copy">Share quick feedback so we can improve the quiz flow. Closing will reset this run and
+          reopen the quiz landing page.</p>
+        <label class="text-answer feedback-text">
+          <span>What made you stop here?</span>
+          <textarea id="closeFeedback" rows="4"
+            placeholder="Example: Too many questions, unclear answer, just exploring..."></textarea>
+        </label>
+        <div class="login-actions">
+          <button class="nav-button back-button" id="cancelCloseButton" type="button">Continue quiz</button>
+          <button class="nav-button next-button" id="confirmCloseButton" type="button">Close and reset</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-screen" id="resultsScreen" hidden>
+      <div class="celebration-modal" id="celebrationModal" hidden>
+        <div class="celebration-card">
+          <p class="section-kicker">QUIZ COMPLETED</p>
+          <h1 style="margin-bottom:16px;">Great Work!</h1>
+          <p id="celebrationCopy" style="font-size:1.1rem; line-height:1.6; color:var(--muted); margin-bottom:32px;">You have successfully completed the MyCarbonCredit Sustainability Assessment.<br><br>Your personalized sustainability report is ready.</p>
+          <div class="celebration-actions">
+            <button class="nav-button back-button" id="viewResultsButton" type="button">View Results</button>
+            <button class="nav-button next-button" id="downloadFromCelebrationButton" type="button">Download Report</button>
+          </div>
+        </div>
+      </div>
+      <div class="result-hero">
+        <p class="section-kicker">Your Green Score</p>
+        <h1 id="resultTitle">You are building a greener routine.</h1>
+        <div class="score-orbit">
+          <span id="scoreValue">0</span>
+          <small>kg CO2e / month</small>
+        </div>
+        <p id="resultCopy">Your footprint estimate is ready.</p>
+      </div>
+
+      <div class="result-grid">
+        <article>
+          <h2>Breakdown</h2>
+          <div id="breakdownList"></div>
+        </article>
+        <article>
+          <h2>Next best moves</h2>
+          <ol id="recommendations"></ol>
+        </article>
+      </div>
+
+      <div class="result-actions">
+        <div class="icon-group">
+          <a class="icon-button" href="index.html" data-tooltip="Home page" aria-label="Home page">
+            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </a>
+          <button class="icon-button" id="restartButton" type="button" data-tooltip="Restart quiz" aria-label="Restart quiz">
+            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+          </button>
+          <button class="icon-button" id="shareButton" type="button" data-tooltip="Share result" aria-label="Share result">
+            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          </button>
+        </div>
+        <button class="nav-button next-button" id="downloadButton" type="button">Download score</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="api.js"></script>
+  <script src="quiz.js"></script>
+  <script src="age-selection.js"></script>
+  <script src="leaf-rain.js"></script>
+</body>
+
+</html>

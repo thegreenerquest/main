@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyCarbonCredit Kids (Ages 8–14) | Interactive Green Quiz &amp; Footprint Missions</title>
+  <link rel="stylesheet" href="../quiz.css" />
+  <link rel="stylesheet" href="kids-quiz.css" />
+</head>
+
+<body class="kids-body">
+  <div class="kids-shell">
+    <!-- ===== HEADER ===== -->
+    <header class="kids-header">
+      <a class="brand" href="../index.html" aria-label="My Carbon Credit home">
+        <img class="quiz-full-logo" src="../assets/Data Leaf.png" alt="My Carbon Credit" />
+      </a>
+
+      <div class="kids-header-right">
+        <div class="kids-mode-pill" id="headerModePill" hidden>
+          <span aria-hidden="true">🧭</span>
+          <span id="headerModeText">Explorer Mode (8–10)</span>
+        </div>
+
+        <div class="wallet-pill" id="kidsWalletPill" aria-label="Green Score progress">
+          <span class="wallet-icon" aria-hidden="true">🌱</span>
+          <strong id="kidsHeaderScore">0</strong>
+          <span>/ 100 Green Pts</span>
+        </div>
+
+        <div class="kids-student-pill" id="kidsStudentPill" title="Participant profile (optional)">
+          <span aria-hidden="true">🌍</span>
+          <span id="kidsStudentLabel">Kids Planet</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="kids-main">
+      <!-- Top Navigation Bar -->
+      <nav class="kids-top-nav" aria-label="Kids Module Navigation">
+        <div class="kids-top-nav-group">
+          <a class="nav-button back-button" id="backToAgeSelection" href="../quiz.html#age-selection">
+            <span aria-hidden="true">&larr;</span>
+            Age Selection
+          </a>
+          <button class="nav-button back-button" id="kidsHomeNavBtn" type="button" hidden>
+            <span aria-hidden="true">🏡</span>
+            Kids Quiz Home
+          </button>
+        </div>
+
+        <div class="kids-top-nav-group">
+          <a class="nav-button back-button" href="../index.html">Main Site</a>
+        </div>
+      </nav>
+
+      <!-- =========================================================
+           SCREEN 1: KIDS LANDING SCREEN
+           ========================================================= -->
+      <section id="kidsLandingScreen" aria-labelledby="kidsLandingTitle">
+        <!-- Resume Incomplete Attempt Banner (shown automatically if an attempt is in progress) -->
+        <div class="kids-resume-banner" id="kidsResumeBanner" hidden style="margin-bottom: 22px;">
+          <div class="kids-resume-copy">
+            <strong>🌱 You have an adventure in progress!</strong>
+            <span id="kidsResumeMeta">Mode: Explorer (8–10) • Activity 1 of 15</span>
+          </div>
+          <div class="kids-resume-actions">
+            <button class="nav-button next-button" id="resumeAttemptBtn" type="button">
+              Resume Adventure &rarr;
+            </button>
+            <button class="nav-button back-button" id="discardAttemptBtn" type="button">
+              Start New Attempt
+            </button>
+          </div>
+        </div>
+
+        <article class="kids-hero-card">
+          <div class="kids-hero-copy">
+            <div class="kids-tag-row">
+              <span class="kids-badge-active">✨ Available Now</span>
+              <span class="kids-age-chip">Ages 8–14</span>
+            </div>
+
+            <p class="section-kicker" style="margin:0; color:#a46d29;">MyCarbonCredit Kids</p>
+            <h1 id="kidsLandingTitle">Fun Nature &amp; Planet Adventures for Young Explorers</h1>
+            <p>
+              Discover how everyday habits—saving water, switching off unused lights, reducing waste, caring for trees and choosing clean travel—help protect our planet!
+            </p>
+            <p>
+              Complete <strong>5 interactive Carbon Footprint Missions</strong> and <strong>10 Green Score Quests</strong> tailored to your age group to unlock eco badges and your personal Planet Protector Dashboard.
+            </p>
+
+            <div class="kids-hero-highlights" aria-label="Quiz overview">
+              <div class="kids-highlight-pill">
+                <strong>🧭 2 Age Modes</strong>
+                <small>Ages 8–10 &amp; Ages 11–14</small>
+              </div>
+              <div class="kids-highlight-pill">
+                <strong>🕵️ 5 Footprint Missions</strong>
+                <small>School travel, home energy &amp; food</small>
+              </div>
+              <div class="kids-highlight-pill">
+                <strong>🌟 100 Green Points</strong>
+                <small>10 interactive quests &amp; 5 badges</small>
+              </div>
+            </div>
+
+            <div class="module-actions" style="display:flex; flex-wrap:wrap; gap:14px; margin-top:10px;">
+              <button class="nav-button next-button" id="startKidsQuizBtn" type="button">
+                Start Kids Quiz &rarr;
+              </button>
+              <a class="nav-button back-button" href="../quiz.html#age-selection">
+                Explore Other Age Groups
+              </a>
+            </div>
+          </div>
+
+          <div class="kids-hero-art" aria-hidden="true">
+            <img src="../assets/journeys/kids.svg" alt="MyCarbonCredit Kids Illustration" />
+            <div class="kids-mascot-speech">
+              "Hi! I'm <strong>Terra</strong> 🌱 Ready to explore your Green Score and Planet Footprint?"
+            </div>
+          </div>
+        </article>
+
+        <section class="kids-feature-grid" aria-label="Kids Quiz features" style="margin-top: 22px;">
+          <div class="kids-feature-box">
+            <span class="feature-icon" aria-hidden="true">🌿</span>
+            <strong>Interactive Mini-Scenes</strong>
+            <p>Turn off running taps, flip smart-room switches, sort waste into bins, and help pollinator gardens bloom.</p>
+          </div>
+          <div class="kids-feature-box">
+            <span class="feature-icon" aria-hidden="true">📊</span>
+            <strong>Real Footprint Missions</strong>
+            <p>Explore school commuting, shared home electricity, school supplies, and food waste with parent-friendly helpers.</p>
+          </div>
+          <div class="kids-feature-box">
+            <span class="feature-icon" aria-hidden="true">🏅</span>
+            <strong>Planet Protector Report</strong>
+            <p>Unlock Water Warrior, Energy Saver, and Nature Guardian badges and download your printable report.</p>
+          </div>
+        </section>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 2: AGE SELECTION (Explorer 8-10 vs Changemaker 11-14)
+           ========================================================= -->
+      <section class="kids-section-card" id="kidsAgeModeScreen" hidden aria-labelledby="kidsModeSelectTitle">
+        <div>
+          <p class="section-kicker" style="margin:0 0 6px; color:#a46d29;">Step 1 • Choose Your Mode</p>
+          <h2 id="kidsModeSelectTitle" style="margin:0; font-size:clamp(1.6rem, 3vw, 2.2rem); font-weight:900;">
+            Which Green Explorer Mode Fits You Best?
+          </h2>
+          <p style="margin:8px 0 0; color:var(--kids-muted); font-size:1rem;">
+            Each mode loads its own dedicated question bank, interactive scenarios, and explanations.
+          </p>
+        </div>
+
+        <div class="kids-mode-grid">
+          <!-- Option 1: Explorer Mode (8-10) -->
+          <div class="kids-mode-card mode-explorer" id="cardExplorerMode" role="button" tabindex="0" aria-label="Select Explorer Mode Ages 8 to 10">
+            <div>
+              <div class="kids-mode-top">
+                <div class="kids-mode-icon" aria-hidden="true">🦋</div>
+                <span class="kids-age-chip">Ages 8–10</span>
+              </div>
+              <h3>Explorer Mode</h3>
+              <p>Colourful nature adventures, friendly characters, and simple everyday sustainability habits.</p>
+              <ul class="kids-mode-list">
+                <li>Simple language &amp; short questions</li>
+                <li>Tap-based &amp; visual scene interactions</li>
+                <li>5 Footprint Missions + 10 Explorer Quests</li>
+                <li>Short, encouraging explanations</li>
+              </ul>
+            </div>
+            <button class="nav-button next-button" id="selectExplorerBtn" type="button" style="width:100%; background:#a46d29; border-color:#a46d29;">
+              Choose Explorer Mode (8–10) &rarr;
+            </button>
+          </div>
+
+          <!-- Option 2: Changemaker Mode (11-14) -->
+          <div class="kids-mode-card mode-changemaker" id="cardChangemakerMode" role="button" tabindex="0" aria-label="Select Changemaker Mode Ages 11 to 14">
+            <div>
+              <div class="kids-mode-top">
+                <div class="kids-mode-icon" aria-hidden="true">🌍</div>
+                <span class="kids-badge-active">Ages 11–14</span>
+              </div>
+              <h3>Changemaker Mode</h3>
+              <p>Realistic environmental scenarios, school sustainability audits, and lifecycle simulations.</p>
+              <ul class="kids-mode-list">
+                <li>Environmental decision-making scenarios</li>
+                <li>Interactive simulations &amp; comparisons</li>
+                <li>5 Footprint Missions + 10 Changemaker Quests</li>
+                <li>Critical-thinking explanations</li>
+              </ul>
+            </div>
+            <button class="nav-button next-button" id="selectChangemakerBtn" type="button" style="width:100%;">
+              Choose Changemaker Mode (11–14) &rarr;
+            </button>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-start;">
+          <button class="nav-button back-button" id="backToKidsLandingBtn" type="button">
+            &larr; Back to Kids Home
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 3: MODE INTRODUCTION & OPTIONAL STUDENT DETAILS
+           ========================================================= -->
+      <section class="kids-section-card" id="kidsModeIntroScreen" hidden aria-labelledby="kidsIntroHeading">
+        <div class="kids-intro-grid">
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div class="kids-tag-row">
+              <span class="kids-badge-active" id="introModeBadge">Explorer Mode • Ages 8–10</span>
+              <span class="kids-age-chip">15 Activities Total</span>
+            </div>
+
+            <h2 id="kidsIntroHeading" style="margin:0; font-size:clamp(1.6rem, 2.8vw, 2.15rem); font-weight:900;">
+              Welcome to Explorer Mode!
+            </h2>
+            <p id="kidsIntroDescription" style="margin:0; color:var(--kids-muted); font-size:1.02rem; line-height:1.55;">
+              Your journey has two fun parts. Your progress is saved automatically after every step so you can pause or resume anytime!
+            </p>
+
+            <div class="mission-block" style="background:#fffdf7; border-color:rgba(213, 164, 107, 0.45);">
+              <strong style="color:#a46d29; font-size:1rem;">🗺️ Part 1: Five Carbon Footprint Missions (Activities 1–5)</strong>
+              <p style="margin:0; font-size:0.9rem; color:var(--kids-muted); line-height:1.45;">
+                Tell us about your school commute, daily travel, home electricity (with a parent's help if needed), school supplies, and food habits. These 5 missions estimate your carbon footprint in <strong>kg CO₂e</strong> and do not affect your Green Points.
+              </p>
+            </div>
+
+            <div class="mission-block" style="background:#f4faf5; border-color:rgba(47, 112, 72, 0.35);">
+              <strong style="color:var(--kids-leaf); font-size:1rem;">🌟 Part 2: 10 Interactive Green Score Quests (Activities 6–15)</strong>
+              <p style="margin:0; font-size:0.9rem; color:var(--kids-muted); line-height:1.45;">
+                Play 10 balanced quests across <em>Sustainable Habits (3)</em>, <em>Decision-making (3)</em>, <em>Environmental Awareness (2)</em>, and <em>Practical Application (2)</em> for up to <strong>100 Green Points</strong>!
+              </p>
+            </div>
+          </div>
+
+          <!-- Optional Child Details (Name, Class, Roll Number) -->
+          <div class="kids-optional-box">
+            <h3>
+              <span>🎒 Student Tag</span>
+              <span class="kids-optional-tag">All Optional</span>
+            </h3>
+            <p style="margin:0; font-size:0.84rem; color:var(--kids-muted); line-height:1.4;">
+              You can enter your name, class, and roll number for your downloadable certificate, or leave them blank to play pseudonymously.
+            </p>
+
+            <div class="kids-field-group">
+              <label for="kidsChildNameInput">Child Name (Optional)</label>
+              <input class="kids-input" id="kidsChildNameInput" type="text" maxlength="60" placeholder="e.g. Aarav / Diya" autocomplete="off" />
+              <small class="kids-field-error" id="kidsNameError" hidden></small>
+            </div>
+
+            <div class="kids-field-row">
+              <div class="kids-field-group">
+                <label for="kidsClassInput">Class / Grade (Optional)</label>
+                <input class="kids-input" id="kidsClassInput" type="text" maxlength="15" placeholder="e.g. 5B or Class 7A" autocomplete="off" />
+                <small class="kids-field-error" id="kidsClassError" hidden></small>
+              </div>
+              <div class="kids-field-group">
+                <label for="kidsRollNumberInput">Roll No. (Optional)</label>
+                <input class="kids-input" id="kidsRollNumberInput" type="text" inputmode="numeric" maxlength="4" placeholder="e.g. 14 (1–999)" autocomplete="off" />
+                <small class="kids-field-error" id="kidsRollError" hidden></small>
+              </div>
+            </div>
+
+            <label style="display:flex; align-items:flex-start; gap:10px; font-size:0.86rem; color:var(--kids-ink); cursor:pointer; margin-top:4px;">
+              <input type="checkbox" id="kidsGuardianAssistCheckbox" style="margin-top:3px; accent-color:var(--kids-leaf); width:18px; height:18px;" />
+              <span>A parent, guardian, or teacher is helping me with this quiz (optional)</span>
+            </label>
+
+            <div style="font-size:0.76rem; color:var(--kids-muted); background:#ffffff; padding:10px 12px; border-radius:12px; border:1px solid var(--kids-line);">
+              🔒 <strong>Privacy First:</strong> We never ask for your phone number, home address, or personal email. Attempt ID: <code id="introResponseIdPreview">MCC-KIDS-...</code>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+          <button class="nav-button back-button" id="changeModeFromIntroBtn" type="button">
+            &larr; Change Age Mode
+          </button>
+          <button class="nav-button next-button" id="beginMissionsBtn" type="button">
+            Start Mission 1 of 5 &rarr;
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 4: INTERACTIVE QUIZ & MISSIONS STAGE (Activities 1–15)
+           ========================================================= -->
+      <section id="kidsStageScreen" hidden aria-live="polite">
+        <!-- Segmented Progress Panel -->
+        <div class="kids-progress-panel" style="margin-bottom: 20px;">
+          <div class="kids-progress-top">
+            <span class="kids-stage-chip stage-mission" id="stageTypeChip">
+              🗺️ Footprint Mission 1 of 5
+            </span>
+            <span class="kids-progress-counter" id="stageOverallCounter">
+              Activity 1 of 15
+            </span>
+          </div>
+
+          <div class="kids-segmented-bar" aria-label="Quiz progress bar">
+            <div class="kids-bar-segment" title="5 Carbon Footprint Missions">
+              <div class="kids-bar-fill fill-mission" id="missionProgressBar" style="width: 20%;"></div>
+            </div>
+            <div class="kids-bar-segment" title="10 Scored Green Quests">
+              <div class="kids-bar-fill fill-quest" id="questProgressBar" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <div class="kids-progress-labels">
+            <span id="missionBarLabel">5 Footprint Missions (No Green Points)</span>
+            <span id="questBarLabel">10 Scored Green Quests (100 Green Points)</span>
+          </div>
+        </div>
+
+        <!-- Milestone Transition Callout (Shown when moving from Mission 5 to Quest 1) -->
+        <div class="kids-resume-banner" id="questsTransitionBanner" hidden style="margin-bottom: 18px;">
+          <div class="kids-resume-copy">
+            <strong>🎉 All 5 Carbon Footprint Missions Completed!</strong>
+            <span>Now let's begin your 10 interactive Green Score Quests! Each quest carries up to 10 Green Points.</span>
+          </div>
+        </div>
+
+        <!-- Main Activity Card -->
+        <article class="kids-activity-card" id="kidsActivityCard">
+          <div class="kids-activity-split">
+            <!-- Left Side: Dynamic Interactive Scene Container (Changes ONLY when clicked directly) -->
+            <aside class="kids-activity-left" id="kidsInteractiveContainer" aria-label="Interactive Eco-Scene"></aside>
+
+            <!-- Right Side: Question Header, Answer Options / Mission Inputs, Feedback & Navigation -->
+            <div class="kids-activity-right">
+              <div class="kids-activity-header">
+                <div class="kids-meta-badges">
+                  <span class="kids-topic-badge" id="activityCategoryBadge">💧 Water Conservation</span>
+                  <span class="kids-dim-badge" id="activityDimensionBadge">Sustainable Habits</span>
+                </div>
+                <h1 class="kids-activity-title" id="activityTitle">Activity Title</h1>
+                <p class="kids-activity-subtitle" id="activitySubtitle">Activity instructions go here.</p>
+              </div>
+
+              <!-- Dynamic Answer Options / Mission Inputs Container -->
+              <div id="kidsAnswerContainer"></div>
+
+              <!-- Post-Answer Encouraging Feedback Banner (For Scored Questions) -->
+              <div class="kids-feedback-banner" id="kidsFeedbackBanner" hidden>
+                <div class="kids-feedback-mascot" id="kidsFeedbackEmoji" aria-hidden="true">🌱</div>
+                <div class="kids-feedback-body">
+                  <div class="kids-feedback-title" id="kidsFeedbackHeading">Great thinking, Explorer!</div>
+                  <p class="kids-feedback-explanation" id="kidsFeedbackText"></p>
+                </div>
+              </div>
+
+              <!-- Bottom Navigation Bar -->
+              <div class="quiz-actions" style="margin-top: 8px; align-items: center;">
+                <button class="nav-button back-button" id="stageBackBtn" type="button">
+                  <span aria-hidden="true">&larr;</span>
+                  Previous
+                </button>
+
+                <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+                  <button class="nav-button next-button" id="stageCheckAnswerBtn" type="button" hidden style="background:#a46d29; border-color:#a46d29;">
+                    Check Answer ✨
+                  </button>
+                  <button class="nav-button next-button" id="stageNextBtn" type="button">
+                    Next &rarr;
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 5: DEDICATED KIDS RESULTS DASHBOARD
+           ========================================================= -->
+      <section class="kids-results-wrap" id="kidsResultsScreen" hidden aria-labelledby="resultsHeroHeading">
+        <!-- A. Green Score Hero -->
+        <div class="kids-results-hero">
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div class="kids-tag-row">
+              <span class="kids-badge-active" id="resultModeBadge">Explorer Mode (8–10)</span>
+              <span class="kids-age-chip" id="resultStageBadge">Planet Protector Champion</span>
+            </div>
+
+            <h1 id="resultsHeroHeading" style="margin:0; font-size:clamp(1.75rem, 3.2vw, 2.45rem);">
+              Awesome Job, Planet Explorer!
+            </h1>
+
+            <p id="resultsHeroCopy" style="margin:0; color:var(--kids-muted); font-size:1.03rem; line-height:1.55;">
+              You completed all 5 Carbon Footprint Missions and 10 Green Score Quests! Here is your personalised sustainability dashboard.
+            </p>
+
+            <div style="background:#ffffff; border:1px solid var(--kids-line); border-radius:16px; padding:12px 16px; font-size:0.84rem; color:var(--kids-muted);">
+              📌 <strong>Important Note:</strong> Your <strong>Green Score (out of 100)</strong> reflects your self-reported habits, scenario decisions, and environmental awareness. It is separate from your <strong>Estimated Carbon Footprint (kg CO₂e)</strong> and does not represent verified carbon offsets.
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:4px;">
+              <button class="nav-button next-button" id="kidsDownloadReportBtn" type="button">
+                🏅 Download Printable Report
+              </button>
+              <button class="nav-button back-button" id="kidsRetrySyncBtn" type="button" hidden>
+                🔄 Retry Saving to Cloud
+              </button>
+              <button class="nav-button back-button" id="kidsRestartBtn" type="button">
+                🔄 Play New Attempt
+              </button>
+            </div>
+          </div>
+
+          <div class="kids-score-dial-box">
+            <div class="kids-score-ring" id="kidsScoreRing">
+              <div class="kids-score-ring-inner">
+                <strong id="resultGreenScoreValue">0</strong>
+                <span>out of 100 Pts</span>
+              </div>
+            </div>
+            <strong id="resultScorePercentText" style="font-size:1.08rem; color:var(--kids-ink);">0% Green Score</strong>
+            <small id="resultSyncStatusText" style="color:var(--kids-muted); margin-top:4px; font-size:0.8rem;">
+              Saved against Response_ID
+            </small>
+          </div>
+        </div>
+
+        <!-- E. Achievement Badges -->
+        <article class="kids-dash-card full-span" aria-labelledby="badgesSectionTitle">
+          <h2>
+            <span id="badgesSectionTitle">🏅 Your Eco Achievement Badges</span>
+            <span class="kids-optional-tag" id="unlockedBadgesCountTag">0 / 5 Unlocked</span>
+          </h2>
+          <p style="margin:-8px 0 0; font-size:0.88rem; color:var(--kids-muted);">
+            Badges reward your own choices, habits, and knowledge—never household circumstances outside your control!
+          </p>
+          <div class="kids-badges-grid" id="kidsBadgesGrid"></div>
+        </article>
+
+        <!-- B. Assessment Breakdown (4 Dimensions + Topic Categories) -->
+        <div class="kids-dashboard-grid">
+          <article class="kids-dash-card" aria-labelledby="dimBreakdownTitle">
+            <h2>
+              <span id="dimBreakdownTitle">📊 4 Assessment Dimensions</span>
+              <span class="kids-optional-tag">Max 100 Pts</span>
+            </h2>
+            <div class="kids-dim-list" id="kidsDimensionsList"></div>
+          </article>
+
+          <article class="kids-dash-card" aria-labelledby="topicBreakdownTitle">
+            <h2>
+              <span id="topicBreakdownTitle">🌿 Topic-Wise Performance</span>
+              <span class="kids-optional-tag" id="strongestTopicTag">Top Topic</span>
+            </h2>
+            <div class="kids-dim-list" id="kidsTopicsList"></div>
+          </article>
+        </div>
+
+        <!-- C. Carbon Footprint Summary (Separate from Green Score) -->
+        <article class="kids-dash-card full-span" aria-labelledby="footprintSummaryTitle">
+          <h2>
+            <span id="footprintSummaryTitle">🌍 Estimated Carbon Footprint Summary</span>
+            <span class="kids-fp-status-chip" id="footprintOverallStatusChip">Complete Indicative Estimate</span>
+          </h2>
+          <p style="margin:-8px 0 0; font-size:0.9rem; color:var(--kids-muted);">
+            Calculated separately from your 5 Footprint Missions using activity data and documented emission factors.
+          </p>
+
+          <div class="kids-fp-summary-banner">
+            <div class="kids-fp-kpi">
+              <strong id="fpMonthlyKgValue">0.0</strong>
+              <span>kg CO₂e / month (estimated)</span>
+            </div>
+            <div class="kids-fp-kpi">
+              <strong id="fpAnnualKgValue">0.0</strong>
+              <span>kg CO₂e / year (estimated)</span>
+            </div>
+            <div class="kids-fp-kpi">
+              <strong id="fpReportingPeriodValue">Typical Month</strong>
+              <span id="fpHouseholdAllocationLabel">Household Allocation Applied</span>
+            </div>
+          </div>
+
+          <div class="kids-dim-list" id="kidsFootprintBreakdownList"></div>
+
+          <div class="kids-methodology-note">
+            <strong>Methodological &amp; Boundary Disclosure (GHG Protocol / ISO 14064-1 &amp; ISO 14067 Principles):</strong>
+            <ul style="margin:6px 0 0; padding-left:18px;">
+              <li><strong>Boundary &amp; Non-Certification:</strong> This calculator provides an educational, indicative child-level estimate and is <em>not</em> an ISO 14064-1 certified inventory. Student travel to school is categorised as <em>Student School Commuting</em> (not corporate Scope 3 Category 7 Employee Commuting).</li>
+              <li><strong>Shared Household &amp; Device Allocation:</strong> Household electricity (CEA India Grid Baseline v20.0, 2024: 0.727 kg CO₂e/kWh) is allocated using an equal per-capita household share (1 ÷ household size) so whole-household consumption is never attributed to a child. Shared digital devices are allocated across users, and active device charging is not double-counted when household electricity is provided.</li>
+              <li><strong>Geographical &amp; Proxy Limitations:</strong> India-specific emission factors (CEA, India GHG Program, CGIAR/FAO) are used for grid power, road/rail transport, and diet; international lifecycle proxies (ISO 14067 literature, DEFRA/DESNZ, EXIOBASE) are used for school supplies and embodied electronics.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- D. Personalised Recommendations -->
+        <article class="kids-dash-card full-span" aria-labelledby="recsSectionTitle">
+          <h2>
+            <span id="recsSectionTitle">💡 Your Personalised Green Action Plan</span>
+            <span class="kids-optional-tag">Age-Appropriate Steps</span>
+          </h2>
+          <div class="kids-rec-grid" id="kidsRecommendationsGrid"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <!-- Scripts: Reuse existing config.js and api.js, plus Kids Data & Engine -->
+  <script src="../config.js"></script>
+  <script src="../api.js"></script>
+  <script src="kids-data.js"></script>
+  <script src="kids-quiz.js"></script>
+</body>
+
+</html>

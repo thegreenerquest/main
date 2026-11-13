@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyCarbonCredit Young Adults (Ages 15–20) | Coming Soon</title>
+  <link rel="stylesheet" href="../quiz.css" />
+  <style>
+    .module-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--paper, #fbfaf5);
+      color: var(--ink, #102119);
+    }
+
+    .module-main {
+      flex: 1;
+      width: min(960px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: clamp(24px, 4vh, 48px) 0 clamp(40px, 6vh, 60px);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .module-nav-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .module-hero-card {
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid rgba(43, 122, 120, 0.3);
+      border-radius: 28px;
+      box-shadow: 0 18px 50px rgba(26, 38, 31, 0.08);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .module-copy {
+      padding: clamp(28px, 4vw, 48px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .module-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .module-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: #e8f5f3;
+      color: #246a68;
+      border: 1px solid rgba(43, 122, 120, 0.25);
+    }
+
+    .module-age-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      background: #f1f9f7;
+      color: var(--ink, #102119);
+      border: 1px solid var(--line, #ded8ca);
+    }
+
+    .module-copy h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3.6vw, 2.8rem);
+      line-height: 1.15;
+      font-weight: 900;
+      color: var(--ink, #102119);
+    }
+
+    .module-copy p {
+      margin: 0;
+      font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+      color: var(--muted, #5d6a60);
+      line-height: 1.6;
+    }
+
+    .module-art-pane {
+      background: radial-gradient(circle at 50% 50%, rgba(210, 235, 230, 0.7) 0%, rgba(255, 255, 255, 0.95) 75%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      height: 100%;
+      border-left: 1px solid rgba(222, 216, 202, 0.6);
+    }
+
+    .module-art-pane img {
+      width: min(220px, 80%);
+      height: auto;
+      filter: drop-shadow(0 12px 24px rgba(43, 122, 120, 0.15));
+    }
+
+    .module-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    /* Preview feature cards */
+    .feature-preview-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-box {
+      background: #ffffff;
+      border: 1px solid var(--line, #ded8ca);
+      border-radius: 20px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 6px 20px rgba(26, 38, 31, 0.04);
+    }
+
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 4px;
+    }
+
+    .feature-box strong {
+      font-size: 1.05rem;
+      color: var(--ink, #102119);
+    }
+
+    .feature-box p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted, #5d6a60);
+      line-height: 1.45;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 820px) {
+      .module-hero-card {
+        grid-template-columns: 1fr;
+      }
+      .module-art-pane {
+        border-left: none;
+        border-top: 1px solid rgba(222, 216, 202, 0.6);
+        padding: 28px;
+      }
+      .feature-preview-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="module-shell">
+    <header class="quiz-header">
+      <a class="brand" href="../index.html" aria-label="My Carbon Credit home">
+        <img class="quiz-full-logo" src="../assets/Data Leaf.png" alt="My Carbon Credit" />
+      </a>
+      <div class="header-actions">
+        <div class="wallet-pill" id="walletPill" aria-label="Green points wallet">
+          <span class="wallet-icon" aria-hidden="true">🌱</span>
+          <span>Green Journey</span>
+        </div>
+        <div class="login-button" style="display:inline-flex; align-items:center; justify-content:center; cursor:default; pointer-events:none; padding: 0 24px;">Young Adults</div>
+      </div>
+    </header>
+
+    <main class="module-main">
+      <nav class="module-nav-bar" aria-label="Module navigation">
+        <a class="nav-button back-button" id="backToAgeSelection" href="../quiz.html#age-selection">
+          <span aria-hidden="true">&larr;</span>
+          Back to Age Selection
+        </a>
+        <a class="nav-button back-button" href="../index.html">View Main Site</a>
+      </nav>
+
+      <article class="module-hero-card">
+        <div class="module-copy">
+          <div class="module-tag-row">
+            <span class="module-badge">Coming Soon</span>
+            <span class="module-age-chip">Ages 15–20</span>
+          </div>
+
+          <p class="section-kicker" style="margin:0; color:#2b7a78;">MyCarbonCredit Young Adults</p>
+          <h1>Interactive Climate Challenges for Young Leaders</h1>
+          <p>
+            Explore climate change, carbon emissions, sustainable campus lifestyles, and meaningful environmental action through gamified quests and interactive missions.
+          </p>
+          <p>
+            The dedicated 20-question interactive challenge is currently in active development. Stay tuned as we build an experience tailored to school, college and early-career youth!
+          </p>
+
+          <div class="module-actions">
+            <a class="nav-button next-button" style="background:#2b7a78; border-color:#2b7a78;" href="../quiz.html#age-selection">
+              Explore Other Age Groups &rarr;
+            </a>
+            <a class="nav-button back-button" href="../quiz.html">
+              Quiz Home
+            </a>
+          </div>
+        </div>
+
+        <div class="module-art-pane" aria-hidden="true">
+          <img src="../assets/journeys/young-adults.svg" alt="Young Adults Journey Art" />
+        </div>
+      </article>
+
+      <section class="feature-preview-grid" aria-label="Upcoming features preview">
+        <div class="feature-box">
+          <span class="feature-icon" aria-hidden="true">⚡</span>
+          <strong>Campus & Commute Missions</strong>
+          <p>Assess lifestyle emissions across daily transport, digital gadgets, and campus habits.</p>
+        </div>
+        <div class="feature-box">
+          <span class="feature-icon" aria-hidden="true">🎯</span>
+          <strong>Climate Action Streaks</strong>
+          <p>Take weekly eco-challenges, unlock badges, and earn verified Green Points.</p>
+        </div>
+        <div class="feature-box">
+          <span class="feature-icon" aria-hidden="true">🌱</span>
+          <strong>Youth Sustainability Badge</strong>
+          <p>Receive your personalized carbon literacy score and actionable green steps.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+
+</html>

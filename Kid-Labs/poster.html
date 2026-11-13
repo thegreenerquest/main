@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset=UTF-8/>
+  <meta name=viewport content=width=device-width,initial-scale=1.0/>
+  <title>What's Your Carbon Impact?</title>
+  <link href=https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap rel=stylesheet/>
+  <script src=https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js><\/script>
+  <script src=https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js><\/script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:#b8d9a0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px 16px 40px;gap:18px}
+    .save-btn{background:#173317;color:#fff;border:none;border-radius:10px;padding:11px 28px;font-size:14px;font-weight:700;letter-spacing:.8px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(23,51,23,.35);transition:background .2s,transform .15s}
+    .save-btn:hover{background:#2e7d32;transform:translateY(-2px)}
+    .poster{position:relative;width:980px;max-width:100%;background:linear-gradient(160deg,#f2f8ed 0%,#e6f3de 45%,#f7faf3 100%);border-radius:20px;overflow:hidden;box-shadow:0 28px 72px rgba(20,60,20,.22)}
+    .blob{position:absolute;border-radius:50%;pointer-events:none}
+    .blob-tr{top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(120,190,90,.28) 0%,transparent 70%)}
+    .blob-bl{bottom:80px;left:-100px;width:260px;height:260px;background:radial-gradient(circle,rgba(120,190,90,.20) 0%,transparent 70%)}
+    .inner{position:relative;z-index:1;padding:36px 40px 0}
+    .tagline{text-align:center;font-size:12.5px;font-weight:700;letter-spacing:2.2px;color:#2c6a2c;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:5px}
+    h1{text-align:center;font-size:clamp(36px,5vw,58px);font-weight:900;line-height:1.08;color:#173317;margin-bottom:7px}
+    h1 .g{color:#2d7a2d}
+    .sub{text-align:center;font-size:18px;font-weight:700;color:#2c5c2c;margin-bottom:9px}
+    .sub::after{content:'';display:block;width:44px;height:3.5px;background:linear-gradient(90deg,#4caf50,#8bc34a);border-radius:2px;margin:7px auto 0}
+    .intro{text-align:center;font-size:14px;color:#4a4a4a;line-height:1.7;max-width:520px;margin:0 auto 28px}
+    .intro .a{color:#2e7d32;font-weight:700}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+    .bullets{list-style:none;display:flex;flex-direction:column}
+    .bullets li{display:flex;align-items:flex-start;gap:14px;padding:18px 0}
+    .bullets li:not(:last-child){border-bottom:1px solid #c6e3c0}
+    .bi{flex-shrink:0;width:43px;height:43px;background:#173317;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px}
+    .bt strong{display:block;font-size:12.5px;font-weight:800;letter-spacing:.6px;color:#173317;margin-bottom:3px}
+    .bt p{font-size:12.5px;color:#595959;line-height:1.55}
+    .qz{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .tpill{align-self:flex-end;display:flex;align-items:center;gap:8px;background:#d6edcc;border:1.5px solid #8bc87a;border-radius:30px;padding:7px 16px;font-size:10.5px;font-weight:800;color:#173317;letter-spacing:.7px}
+    .qcard{position:relative;width:210px;height:210px;background:#fff;border:3.5px solid #173317;border-radius:16px;box-shadow:0 8px 28px rgba(23,51,23,.20);display:flex;align-items:center;justify-content:center;padding:10px}
+    #qc{display:block;width:100%!important;height:100%!important;border-radius:8px}
+    .qlogo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;background:#fff;border-radius:50%;border:3.5px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.16);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:4px}
+    .qlogo svg{width:100%;height:100%;display:block}
+    .cta{display:flex;align-items:center;justify-content:center;width:210px;background:#173317;color:#fff;font-size:14.5px;font-weight:800;letter-spacing:1.6px;padding:13px 0;border-radius:10px;text-decoration:none;box-shadow:0 5px 16px rgba(23,51,23,.40);transition:background .2s,transform .15s}
+    .cta:hover{background:#2e7d32;transform:translateY(-2px)}
+    .vrow{width:210px;display:flex;flex-direction:column;align-items:center;gap:5px}
+    .vl{font-size:12px;color:#555;display:flex;align-items:center;gap:5px;align-self:flex-start}
+    .ulink{display:block;width:100%;text-align:center;background:#fff;border:1.5px solid #80c580;border-radius:8px;padding:8px;font-size:11.5px;font-weight:600;color:#173317;text-decoration:none;word-break:break-all;box-shadow:0 2px 8px rgba(23,51,23,.09);transition:background .2s,border-color .2s,box-shadow .2s}
+    .ulink:hover{background:#e4f4dc;border-color:#2e7d32;box-shadow:0 4px 14px rgba(23,51,23,.16);text-decoration:underline}
+    .cats{display:flex;justify-content:space-between;align-items:center;padding:16px 40px;margin-top:24px;border-top:1.5px solid #bce0b0;position:relative;z-index:1}
+    .citems{display:flex;gap:24px}
+    .ci{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;color:#173317;letter-spacing:.5px}
+    .cs{font-size:12.5px;font-weight:700;color:#173317;text-align:right;line-height:1.5}
+    .cs .h{color:#4caf50}
+    .foot{background:#173317;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:14px 40px;position:relative;z-index:1}
+    .fl{display:flex;align-items:center;gap:15px}
+    .fb{width:40px;height:40px;border-radius:50%;border:2px solid rgba(255,255,255,.38);display:flex;align-items:center;justify-content:center;font-size:19px}
+    .ft strong{display:block;font-size:11.5px;font-weight:800;letter-spacing:.6px}
+    .ft span{font-size:10.5px;opacity:.68;font-style:italic}
+    .ft .fa{color:#90d47a;font-weight:600;font-style:italic;opacity:1}
+    .fr{font-size:24px}
+  </style>
+</head>
+<body>
+<button class=save-btn onclick=saveImg()>📥 Save as Image (PNG)</button>
+<div class=poster id=poster>
+  <div class=blob blob-tr></div>
+  <div class=blob blob-bl></div>
+  <div class=inner>
+    <p class=tagline><span>🌿</span> DISCOVER. UNDERSTAND. ACT. <span>🌿</span></p>
+    <h1>What's Your<br/><span class=g>Carbon</span> Impact?</h1>
+    <p class=sub>Small choices. Big difference.</p>
+    <p class=intro>Take a quick quiz to calculate your carbon footprint<br/>and get personalized insights &amp; suggestions<br/>to <span class=a>reduce</span> and <span class=a>offset</span> your impact.</p>
+    <div class=grid>
+      <ul class=bullets>
+        <li><div class=bi>🎯</div><div class=bt><strong>KNOW YOUR IMPACT</strong><p>Understand how your daily choices contribute to carbon emissions.</p></div></li>
+        <li><div class=bi>📈</div><div class=bt><strong>GET INSIGHTS</strong><p>See your results across key lifestyle areas.</p></div></li>
+        <li><div class=bi>🌱</div><div class=bt><strong>TAKE ACTION</strong><p>Receive simple, practical ways to reduce or offset your footprint.</p></div></li>
+      </ul>
+      <div class=qz>
+        <div class=tpill>🕐&ensp;JUST 3 MINUTES &nbsp;FOR A GREENER TOMORROW</div>
+        <div class=qcard>
+          <canvas id=qc></canvas>
+          <div class=qlogo>
+            <svg xmlns=http://www.w3.org/2000/svg viewBox=0 0 240 240>
+              <defs><linearGradient id=g1 x1=42 y1=196 x2=196 y2=42 gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#1da8c3/><stop offset=.48 stop-color=#48b36f/><stop offset=1 stop-color=#9bcf4d/></linearGradient></defs>
+              <g fill=none stroke=url(#g1) stroke-linecap=round stroke-linejoin=round><path d=M58 73a70 70 0 0 1 67-36 stroke-width=10/><path d=M166 50a70 70 0 0 1 22 72 stroke-width=10/><path d=M176 47l27-6-7 27 stroke-width=10/><path d=M178 157a70 70 0 0 1-119 0 stroke-width=10/><path d=M52 157l-6 27 27-8 stroke-width=10/><path d=M122 27c19 22 30 39 30 59s-13 36-30 36-30-16-30-36 11-37 30-59z stroke-width=9/><path d=M122 53v57 stroke-width=8/><path d=M64 131c12 1 22 6 28 15 6 10 5 21-2 32-13-2-24-7-30-17-6-9-5-20 4-30z stroke-width=8/><path d=M169 112c-19 6-34 18-39 35 17 4 35-3 46-17 5-7 5-13-7-18z stroke-width=8/></g>
+              <g fill=url(#g1)><path d=M67 181h25v-34l-25 18v16z/><path d=M99 181h25v-50l-25 16v34z/><path d=M131 181h25v-43l-25 16v27z/><path d=M61 171l29-23 17 14 33-30 8 9-41 37-18-15-21 18z/></g>
+            </svg>
+          </div>
+        </div>
+        <a href=https://thegreenerquest.com/quiz target=_blank rel=noopener class=cta id=quiz-btn>TAKE THE QUIZ</a>
+        <div class=vrow>
+          <span class=vl>🌐 Or visit:</span>
+          <a href=https://thegreenerquest.com/quiz target=_blank rel=noopener class=ulink id=quiz-url>https://thegreenerquest.com/quiz</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=cats>
+    <div class=citems>
+      <div class=ci><span>🚗</span> TRANSPORT</div>
+      <div class=ci><span>🏠</span> HOME ENERGY</div>
+      <div class=ci><span>🥗</span> FOOD &amp; DIET</div>
+      <div class=ci><span>🛍️</span> SHOPPING</div>
+      <div class=ci><span>🧘</span> LIFESTYLE</div>
+    </div>
+    <div class=cs>Every choice <span class=h>counts.</span><br/>Every footprint <span class=h>matters.</span></div>
+  </div>
+  <div class=foot>
+    <div class=fl><div class=fb>🌱</div><div class=ft><strong>PGDM CAPSTONE PROJECT &nbsp;|&nbsp; GOA INSTITUTE OF MANAGEMENT</strong><span>Building a <span class=fa>Sustainability Analytics Framework</span> for Individuals to <span class=fa>Offset Carbon Impacts</span></span></div></div>
+    <div class=fr>🌍</div>
+  </div>
+</div>
+<script>
+QRCode.toCanvas(document.getElementById('qc'),'https://thegreenerquest.com/quiz',{width:188,margin:1,color:{dark:'#173317',light:'#ffffff'},errorCorrectionLevel:'H'},function(e){if(e)console.error(e)});
+function saveImg(){var b=document.querySelector('.save-btn');b.textContent='⏳ Generating…';b.disabled=true;html2canvas(document.getElementById('poster'),{scale:2,useCORS:true,backgroundColor:null,logging:false}).then(function(c){var a=document.createElement('a');a.download='carbon-impact-poster.png';a.href=c.toDataURL('image/png');a.click();b.innerHTML='📥 Save as Image (PNG)';b.disabled=false}).catch(function(){b.innerHTML='⚠️ Try again';b.disabled=false})}
+</script>
+</body>
+</html>

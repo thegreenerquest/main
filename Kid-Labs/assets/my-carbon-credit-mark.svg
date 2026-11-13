@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="My Carbon Credit logo mark">
+  <defs>
+    <linearGradient id="markGradient" x1="42" y1="196" x2="196" y2="42" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1da8c3" />
+      <stop offset="0.48" stop-color="#48b36f" />
+      <stop offset="1" stop-color="#9bcf4d" />
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#markGradient)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M58 73a70 70 0 0 1 67-36" stroke-width="10" />
+    <path d="M166 50a70 70 0 0 1 22 72" stroke-width="10" />
+    <path d="M176 47l27-6-7 27" stroke-width="10" />
+    <path d="M178 157a70 70 0 0 1-119 0" stroke-width="10" />
+    <path d="M52 157l-6 27 27-8" stroke-width="10" />
+    <path d="M122 27c19 22 30 39 30 59s-13 36-30 36-30-16-30-36 11-37 30-59z" stroke-width="9" />
+    <path d="M122 53v57" stroke-width="8" />
+    <path d="M64 131c12 1 22 6 28 15 6 10 5 21-2 32-13-2-24-7-30-17-6-9-5-20 4-30z" stroke-width="8" />
+    <path d="M169 112c-19 6-34 18-39 35 17 4 35-3 46-17 5-7 5-13-7-18z" stroke-width="8" />
+  </g>
+  <g fill="url(#markGradient)">
+    <path d="M67 181h25v-34l-25 18v16z" />
+    <path d="M99 181h25v-50l-25 16v34z" />
+    <path d="M131 181h25v-43l-25 16v27z" />
+    <path d="M61 171l29-23 17 14 33-30 8 9-41 37-18-15-21 18z" />
+  </g>
+</svg>

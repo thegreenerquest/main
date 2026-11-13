@@ -1,0 +1,6 @@
+# Backups / archives (not needed for the site)
+*.zip
+*.bak
+assets_extracted/
+test_fetch_out.txt
+*.xlsx

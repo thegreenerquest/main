@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" width="160" height="120">
+  <!-- MyCarbonCredit Young Adults (15–20): globe in orbit with a climate-action spark -->
+  <defs>
+    <linearGradient id="yaBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f1f9f7"/>
+      <stop offset="1" stop-color="#d2ebe6"/>
+    </linearGradient>
+    <radialGradient id="yaGlobe" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#7cc7b4"/>
+      <stop offset="1" stop-color="#2b7a78"/>
+    </radialGradient>
+    <clipPath id="yaClip">
+      <circle cx="80" cy="62" r="30"/>
+    </clipPath>
+  </defs>
+  <circle cx="80" cy="60" r="54" fill="url(#yaBg)"/>
+
+  <ellipse cx="80" cy="62" rx="60" ry="17" transform="rotate(-16 80 62)" fill="none" stroke="#2b7a78" stroke-width="2" stroke-dasharray="3 6" stroke-linecap="round" opacity="0.55"/>
+
+  <circle cx="80" cy="62" r="30" fill="url(#yaGlobe)"/>
+  <g clip-path="url(#yaClip)">
+    <path d="M58 44 C66 40 72 46 70 52 C68 58 60 56 58 62 C56 66 50 64 50 58 C50 52 52 47 58 44 Z" fill="#b5dd84"/>
+    <path d="M84 50 C92 46 102 50 104 58 C106 66 98 70 94 76 C90 82 82 80 84 72 C86 66 80 62 80 58 C80 54 81 52 84 50 Z" fill="#a5d873"/>
+    <path d="M70 80 C76 78 80 84 76 88 C72 92 64 90 66 85 C67 82 68 81 70 80 Z" fill="#b5dd84"/>
+    <ellipse cx="80" cy="62" rx="30" ry="10" fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
+    <ellipse cx="80" cy="62" rx="12" ry="30" fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.35"/>
+  </g>
+  <circle cx="70" cy="50" r="8" fill="#ffffff" opacity="0.18"/>
+
+  <circle cx="25" cy="80" r="5" fill="#2b7a78"/>
+  <circle cx="25" cy="80" r="9" fill="#2b7a78" opacity="0.18"/>
+
+  <g transform="translate(122 30)">
+    <circle r="14" fill="#fffdf7" stroke="#d5a46b" stroke-width="2"/>
+    <path d="M2 -9 L-6 2 H0 L-2 9 L6 -2 H0 Z" fill="#d5a46b" stroke="#b9853f" stroke-width="0.8" stroke-linejoin="round"/>
+  </g>
+
+  <path d="M40 30 L42 35 L47 37 L42 39 L40 44 L38 39 L33 37 L38 35 Z" fill="#d5a46b" opacity="0.85"/>
+  <path d="M128 86 L129.4 89.6 L133 91 L129.4 92.4 L128 96 L126.6 92.4 L123 91 L126.6 89.6 Z" fill="#2b7a78" opacity="0.7"/>
+</svg>

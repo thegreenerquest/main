@@ -220,3 +220,5 @@ body{font-size:16px}.main-nav a,.footer-links a{font-size:14px}.header-cta,.butt
 .question-card.is-required-question{border-left:3px solid #57905d}
 @media(max-width:680px){.school-level-summary{gap:7px;padding:9px 11px}.school-level-summary>span{font-size:19px}.school-level-summary strong{font-size:13px}.school-level-summary small{font-size:9px}.mandatory-question-policy{padding:10px 11px}.mandatory-question-policy strong{font-size:11px}.mandatory-question-policy span{font-size:10px}.section-required-progress{align-items:flex-start;flex-direction:column;gap:4px}.section-required-progress span{text-align:left;font-size:10px}.question-requirement{font-size:9px;padding:4px 6px}}
 .question-heading h4{flex:1 1 auto}
+.nav-gaming-labs{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:#edf3e4;color:#284f22!important;font-weight:700;font-size:12px;border-radius:99px;border:1px solid #c8dbb8;transition:all .2s;text-decoration:none}
+.nav-gaming-labs:hover{background:#203a30!important;color:#fff!important;border-color:#203a30;transform:translateY(-1px);box-shadow:0 4px 10px #203a3020}
