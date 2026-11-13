@@ -2401,3 +2401,6 @@ if (restoredState?.screen && restoredState.screen !== "landing") {
 }
 renderQuestion();
 hydrateQuizFromCurrentResponse();
+
+window.startQuiz = startQuiz;
+window.restart = restart;

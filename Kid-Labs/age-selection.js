@@ -79,6 +79,26 @@
     landing.hidden = true;
     ageScreen.hidden = false;
     ageScreen.scrollTop = 0;
+
+    // Hide the wallet pill while on the journey selection screen
+    const walletPill = document.getElementById("walletPill");
+    if (walletPill) {
+      walletPill.style.display = "none";
+    }
+
+    // Clear stale quiz state from prior tests so old points do not linger
+    try {
+      window.localStorage.removeItem("mccQuizState");
+      window.localStorage.removeItem("mccCurrentResponseId");
+    } catch (error) {
+      // ignore storage errors
+    }
+
+    const walletPointsEl = document.getElementById("walletPoints");
+    if (walletPointsEl) {
+      walletPointsEl.textContent = "0";
+    }
+
     if (pushHistory && window.location.hash !== SCREEN_HASH) {
       history.pushState({ mccAgeSelection: true }, "", SCREEN_HASH);
     }
@@ -88,6 +108,10 @@
   function showLanding() {
     ageScreen.hidden = true;
     landing.hidden = false;
+    const walletPill = document.getElementById("walletPill");
+    if (walletPill) {
+      walletPill.style.display = "";
+    }
     focusWithoutScroll(startButton);
   }
 
@@ -105,7 +129,13 @@
     rememberSelection("individual");
     ageScreen.hidden = true;
     clearScreenHash();
-    if (typeof window.startQuiz === "function") {
+    const walletPill = document.getElementById("walletPill");
+    if (walletPill) {
+      walletPill.style.display = "";
+    }
+    if (typeof window.restart === "function") {
+      window.restart();
+    } else if (typeof window.startQuiz === "function") {
       window.startQuiz(); // existing Individual quiz – untouched
     } else {
       landing.hidden = false;
@@ -149,15 +179,9 @@
     }
   });
 
-  // Deep link (e.g. "Back" from the Kids / Young Adults pages -> quiz.html#age-selection).
-  // Only honoured when the landing page is the active screen, so a restored in-progress
-  // Individual quiz screen is never hidden or interrupted.
+  // Deep link (e.g. from GreenerQuest "Gaming Labs" button or "Back" from Kids/Young Adults -> quiz.html#age-selection)
   if (window.location.hash === SCREEN_HASH) {
-    if (!landing.hidden) {
-      open({ pushHistory: false });
-    } else {
-      clearScreenHash();
-    }
+    open({ pushHistory: false });
   }
 
   window.MCCAgeSelection = Object.freeze({
